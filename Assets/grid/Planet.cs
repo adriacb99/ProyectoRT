@@ -251,6 +251,9 @@ public class Planet : MonoBehaviour
                     GameObject T_T = ContructionMining.PlaceConstruction(transform, objetoPrueba, transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
                     tile.SetObject(T_T);
                 }
+                else if (tile.tileObject.CompareTag("Construction")) {
+                    tile.tileObject.GetComponent<ContructionMining>().ShowMenu();
+                }
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -264,37 +267,37 @@ public class Planet : MonoBehaviour
         if (Input.anyKeyDown) atm.SetProperties(atmMaterial, 10);
 
 
-        Vector3 o = transform.TransformPoint(grid.GetValue(66).GetPosition());
-        Vector3 n = o - gameObject.transform.position;
-        n = n.normalized;
+        // Vector3 o = transform.TransformPoint(grid.GetValue(66).GetPosition());
+        // Vector3 n = o - gameObject.transform.position;
+        // n = n.normalized;
 
-        // Calculate v1.
-        float s = 1.0f / (n.x * n.x + n.z * n.z);
-        float v1x = s * n.z;
-        float v1y = 0.0f;
-        float v1z = s * -n.x;
+        // // Calculate v1.
+        // float s = 1.0f / (n.x * n.x + n.z * n.z);
+        // float v1x = s * n.z;
+        // float v1y = 0.0f;
+        // float v1z = s * -n.x;
 
-        float v2x = n.y * v1z - n.z * v1y;
-        float v2y = n.z * v1x - n.x * v1z;
-        float v2z = n.x * v1y - n.y * v1x;
-
-
-        Vector3 v = new Vector3(0, n.z, n.y);
+        // float v2x = n.y * v1z - n.z * v1y;
+        // float v2y = n.z * v1x - n.x * v1z;
+        // float v2z = n.x * v1y - n.y * v1x;
 
 
-        Debug.DrawLine(gameObject.transform.position, o, Color.green);
-        for (int i = 0; i < 8; i++)
-        {
-            var radians = 2 * Mathf.PI / 8 * i;
+        // Vector3 v = new Vector3(0, n.z, n.y);
 
-            var spawnDir = Vector3.zero;
 
-            /* Get the vector direction */
-            spawnDir.x = o.x + 0.5f * (v1x * Mathf.Cos(radians) + v2x * Mathf.Sin(radians));
-            spawnDir.y = o.y + 0.5f * (v1y * Mathf.Cos(radians) + v2y * Mathf.Sin(radians));
-            spawnDir.z = o.z + 0.5f * (v1z * Mathf.Cos(radians) + v2z * Mathf.Sin(radians));
+        // Debug.DrawLine(gameObject.transform.position, o, Color.green);
+        // for (int i = 0; i < 8; i++)
+        // {
+        //     var radians = 2 * Mathf.PI / 8 * i;
 
-            Debug.DrawLine(gameObject.transform.position, spawnDir, Color.green);
-        }
+        //     var spawnDir = Vector3.zero;
+
+        //     /* Get the vector direction */
+        //     spawnDir.x = o.x + 0.5f * (v1x * Mathf.Cos(radians) + v2x * Mathf.Sin(radians));
+        //     spawnDir.y = o.y + 0.5f * (v1y * Mathf.Cos(radians) + v2y * Mathf.Sin(radians));
+        //     spawnDir.z = o.z + 0.5f * (v1z * Mathf.Cos(radians) + v2z * Mathf.Sin(radians));
+
+        //     Debug.DrawLine(gameObject.transform.position, spawnDir, Color.green);
+        // }
     }
 }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2204217715015613032}
   - component: {fileID: 785080146193151032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cubo
-  m_TagString: Untagged
+  m_TagString: Construction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miningInterval: 1
   helix: {fileID: 4952180596887208329}
+  ConsumoEnergia: 0
   numMin: 0
   Capacity: 50
+  canvas: {fileID: 0}
 --- !u!1 &7401517134806328258
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +60,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2815236488374445135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +141,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6733177361254619370, guid: de3942a998977b84e9064d85a947d4d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -2484921068739079471, guid: de3942a998977b84e9064d85a947d4d7,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -189,6 +196,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wsca
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: de3942a998977b84e9064d85a947d4d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3316992658331686828, guid: de3942a998977b84e9064d85a947d4d7,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -233,6 +245,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: de3942a998977b84e9064d85a947d4d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
