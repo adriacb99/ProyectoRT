@@ -69,7 +69,7 @@ public class Planet : MonoBehaviour
         private List<Tile> sideTiles;
         private List<int> tris;
 
-        private GameObject tileObject;
+        public GameObject tileObject;
         public TileType type;
 
         public Tile(HexGrid<Tile> grid, Vector3 localPosition, List<int> tris, int tileTypeIndex) 
@@ -109,6 +109,15 @@ public class Planet : MonoBehaviour
         public List<int> GetTrisIndex()
         {
             return tris;
+        }
+
+        public List<GameObject> GetSideTilesObjects()
+        {
+            List<GameObject> result = new List<GameObject>();
+            foreach (Tile tile in sideTiles) {
+                result.Add(tile.tileObject);
+            }
+            return result;
         }
 
         public override string ToString()
@@ -239,8 +248,7 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    GameObject T_T = Instantiate(objetoPrueba, transform.TransformPoint(tile.GetPosition()), Quaternion.LookRotation(hit.normal));
-                    T_T.transform.parent = transform;
+                    GameObject T_T = ContructionMining.PlaceConstruction(transform, objetoPrueba, transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
                     tile.SetObject(T_T);
                 }
             }

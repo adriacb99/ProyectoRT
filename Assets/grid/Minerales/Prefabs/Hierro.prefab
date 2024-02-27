@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2204217715015613032}
   - component: {fileID: 4718490665577405638}
   - component: {fileID: 1450620291930843182}
+  - component: {fileID: 7922608829470480282}
   m_Layer: 0
   m_Name: Hierro
   m_TagString: Mineral
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7922608829470480282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085526725270584742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2501f95c422a65b4988c2f3c2aa75d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantity: 100

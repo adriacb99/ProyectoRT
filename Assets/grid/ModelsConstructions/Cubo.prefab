@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2204217715015613032}
+  - component: {fileID: 785080146193151032}
   m_Layer: 0
   m_Name: Cubo
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   - {fileID: 2815236488374445135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785080146193151032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085526725270584742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97d1bc8c17b6af4fb112bc532e8dcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miningInterval: 1
+  helix: {fileID: 4952180596887208329}
+  numMin: 0
+  Capacity: 50
 --- !u!1 &7401517134806328258
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +239,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de3942a998977b84e9064d85a947d4d7, type: 3}
+--- !u!1 &4952180596887208329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6733177361254619370, guid: de3942a998977b84e9064d85a947d4d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7365457828330088095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7043037882784760180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de3942a998977b84e9064d85a947d4d7,
