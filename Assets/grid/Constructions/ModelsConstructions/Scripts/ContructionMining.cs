@@ -10,9 +10,6 @@ public class ContructionMining : MonoBehaviour
     [SerializeField] private GameObject helix;
     [SerializeField] private int ConsumoEnergia = 0;
     
-    public int numMin = 0;
-    public int Capacity = 0;
-    
     [Header("Canvas")]
     [SerializeField] public GameObject canvas;
 
@@ -20,6 +17,8 @@ public class ContructionMining : MonoBehaviour
     private float time = 0;
     private List<GameObject> mineralsToMine;
     private List<Mineral> minerals;
+
+    [SerializeField] public ItemData item;
 
     bool stopped = true;
 
@@ -56,9 +55,8 @@ public class ContructionMining : MonoBehaviour
                     if (!stopped)
                     {
                         min.GetMineral();
-                        numMin++;
+                        stopped = !GetComponent<MinerInventory>().AddItem(new ItemInstance(item));
                     }
-                    if (numMin >= Capacity) stopped = true;
                 }
             }
         }
@@ -67,8 +65,8 @@ public class ContructionMining : MonoBehaviour
 
     public void ShowMenu() {
         Debug.Log("Abrir Menu");
-        canvas = GameObject.Find("Canvas");
-        canvas.transform.GetChild(0).gameObject.SetActive(true);
-        canvas.GetComponentInChildren<TextMeshProUGUI>().text = numMin.ToString();
+        // canvas = GameObject.Find("Canvas");
+        // canvas.transform.GetChild(0).gameObject.SetActive(true);
+        // canvas.GetComponentInChildren<TextMeshProUGUI>().text = numMin.ToString();
     }
 }
