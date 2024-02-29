@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem; Falta input systema
+//using UnityEngine.InputSystem; 
 //using UnityEngine.InputSystem.XR; Falta input systema
 
 public class NewBehaviourScript : MonoBehaviour
