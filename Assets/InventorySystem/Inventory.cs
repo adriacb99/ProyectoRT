@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinerInventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     public int maxItems = 50; 
     public List<ItemInstance> items = new();
