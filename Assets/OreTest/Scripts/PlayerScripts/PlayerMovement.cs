@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
+//using UnityEngine.InputSystem; Falta input systema
+//using UnityEngine.InputSystem.XR; Falta input systema
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class NewBehaviourScript : MonoBehaviour
     Camera mainCamera;
 
     [Header("Input Action")]
-    [SerializeField] InputActionReference move;
+  //  [SerializeField] InputActionReference move;
 
     private CharacterController characterController;
 
@@ -37,11 +37,11 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnEnable()
     {
-        move.action.Enable();
+    //    move.action.Enable(); Falta input systema
     }
     private void OnDisable()
     {
-        move.action.Disable();
+        //  move.action.Disable(); Falta input systema
     }
 
     // Start is called before the first frame update
@@ -58,16 +58,16 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void UpdateMovement()
     {
-        Vector2 horizontalMovement = move.action.ReadValue<Vector2>();
+        //Vector2 horizontalMovement = move.action.ReadValue<Vector2>(); Falta input system
         //Vector3 moveXZ = new Vector3(horizontalMovement.x, 0f, horizontalMovement.y);
         Vector3 forward = mainCamera.transform.forward;
         forward.Normalize();
         forward.y = 0f;
-        Vector3 moveXZ = forward * horizontalMovement.y +
-                         mainCamera.transform.right * horizontalMovement.x;
-        currentVelocity = moveXZ * movementSpeed;
+        //Vector3 moveXZ = forward * horizontalMovement.y + Falta input system
+        //               mainCamera.transform.right * horizontalMovement.x; Falta input system
+        //currentVelocity = moveXZ * movementSpeed; Falta input system
 
-        if(characterController.isGrounded != true)
+        if (characterController.isGrounded != true)
         {
             verticalVelocity += gravity * Time.deltaTime;
         }
