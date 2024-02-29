@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9186003893714462249}
   - component: {fileID: 6850288298806700901}
   - component: {fileID: 8453292870338528382}
-  - component: {fileID: 680904764357394514}
+  - component: {fileID: 2944828538839126831}
   - component: {fileID: 3453043751426383227}
   m_Layer: 0
   m_Name: Furnance
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &680904764357394514
+--- !u!114 &2944828538839126831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,13 +116,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2496069133708956307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e921e341630d81140bdc76e6c0002065, type: 3}
+  m_Script: {fileID: 11500000, guid: d44fc8bb206f91b4caa43c9ec84b2975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxItems: 50
   items:
   - itemType: {fileID: 11400000, guid: c25b0ff7cf8a9f746bdbe1dd0ded0e61, type: 2}
-    quantity: 50
+    quantity: 40
+    maxStack: 0
+  resultItem:
+    itemType: {fileID: 0}
+    quantity: 0
     maxStack: 0
 --- !u!114 &3453043751426383227
 MonoBehaviour:

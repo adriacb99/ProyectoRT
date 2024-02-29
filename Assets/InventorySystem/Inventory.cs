@@ -37,4 +37,15 @@ public class Inventory : MonoBehaviour
         Debug.Log("No space in the inventory");
         return false;
     }
+    
+    public ItemInstance GetItemInstance(int index) {
+        return items[index];
+    }
+
+    public void RetireItem(int index, int quantity) {
+        if (items[index].quantity - quantity < 0) {
+            Debug.Log("Se quieren retirar mas items de los que hay, se cancela la retirada");
+        }
+        else items[index].quantity -= quantity;
+    }
 }
