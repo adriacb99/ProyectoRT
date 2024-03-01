@@ -46,11 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97d1bc8c17b6af4fb112bc532e8dcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miningInterval: 1
+  miningInterval: 2
   helix: {fileID: 4952180596887208329}
   ConsumoEnergia: 0
-  numMin: 0
-  Capacity: 50
   canvas: {fileID: 0}
   item: {fileID: 11400000, guid: c25b0ff7cf8a9f746bdbe1dd0ded0e61, type: 2}
 --- !u!114 &-8982179987273634631

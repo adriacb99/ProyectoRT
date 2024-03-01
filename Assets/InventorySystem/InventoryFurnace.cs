@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class InventoryFurnace : Inventory
 {
-    [SerializeField] ItemInstance result;
+    [SerializeField] public ItemInstance result;
+
     ItemInstance resultItem;
 
     public bool AddResultItem(ItemInstance itemToAdd)
@@ -13,7 +14,7 @@ public class InventoryFurnace : Inventory
         {
             resultItem = itemToAdd;
             resultItem.quantity++;
-            Debug.Log("Añadiendo stack nuevo al producto quemado en el horno");
+            Debug.Log("Añadiendo stack nuevo al producto quemado en el horno");       
             result = resultItem;
             return true;
         }
