@@ -16,13 +16,13 @@ public class Inventory : MonoBehaviour
             {
                 items[i] = itemToAdd;
                 items[i].quantity++;
-                Debug.Log("Añadiendo stack nuevo");
+                //Debug.Log("Añadiendo stack nuevo");
                 return true;
             }
             else if (items[i].itemType == itemToAdd.itemType && items[i].quantity < items[i].maxStack) 
             {
                 items[i].quantity++;
-                Debug.Log("Añadiendo item a stack");
+                //Debug.Log("Añadiendo item a stack");
                 return true;
             }
         }

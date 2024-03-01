@@ -14,14 +14,14 @@ public class InventoryFurnace : Inventory
         {
             resultItem = itemToAdd;
             resultItem.quantity++;
-            Debug.Log("Añadiendo stack nuevo al producto quemado en el horno");       
+            //Debug.Log("Añadiendo stack nuevo al producto quemado en el horno");       
             result = resultItem;
             return true;
         }
         else if (resultItem.itemType == itemToAdd.itemType && resultItem.quantity < resultItem.maxStack) 
         {
             resultItem.quantity++;
-            Debug.Log("Añadiendo item a stack del producto quemado en el horno");
+            //Debug.Log("Añadiendo item a stack del producto quemado en el horno");
             result = resultItem;
             return true;
         }

@@ -18,7 +18,12 @@ public class CanvasSingleton : MonoBehaviour
         }
     }
 
-    public GameObject GetCanvas(int index) { 
-        return transform.GetChild(index).gameObject;
+    public GameObject GetCanvas(int index) {
+        int i = 0;
+        foreach (RectTransform child in transform) {
+            if (i == index) return child.gameObject;
+            i++;
+        }
+        return null;
     }
 }
