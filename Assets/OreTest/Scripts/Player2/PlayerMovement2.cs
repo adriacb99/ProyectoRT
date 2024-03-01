@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,13 @@ public class PlayerMovement2 : MonoBehaviour
     [SerializeField] float gravity;
     [SerializeField] float movementSpeed;
 
+    private CharacterController characterController;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -21,4 +25,10 @@ public class PlayerMovement2 : MonoBehaviour
     {
         
     }
+
+    private void OnEnable()
+    {
+        
+    }
+    
 }
