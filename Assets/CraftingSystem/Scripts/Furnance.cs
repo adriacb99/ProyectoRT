@@ -55,8 +55,8 @@ public class Furnance : MonoBehaviour
     public void UpdateCanvas()
     {
         canvas.SetActive(true);
-        canvas.GetComponentsInChildren<Slot>()[0].SetSlotImage(selectedRecipe.CraftedItem.icon);
-        canvas.GetComponentsInChildren<Slot>()[1].SetSlotImage(selectedRecipe.RequiredItems[0].Item.icon);
+        canvas.GetComponentsInChildren<Slot>()[0].SetSlotImage(selectedRecipe.CraftedItem);
+        canvas.GetComponentsInChildren<Slot>()[1].SetSlotImage(selectedRecipe.RequiredItems[0].Item);
         TextMeshProUGUI[] testo = canvas.GetComponentsInChildren<TextMeshProUGUI>();
         testo[0].text = inventory.result.quantity.ToString();
         testo[1].text = inventory.items[0].quantity.ToString();
