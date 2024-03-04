@@ -7,6 +7,10 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement2 : MonoBehaviour
 {
+    PlayerControls controls;
+    Vector2 moveVector;
+
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -16,6 +20,8 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void Awake()
     {
+        controls = new PlayerControls();
+
         controller = GetComponent<CharacterController>();
     }
 
@@ -24,6 +30,8 @@ public class PlayerMovement2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //moveVector = controls.
+
 
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
