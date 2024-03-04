@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem; 
 //using UnityEngine.InputSystem.XR; Falta input systema
 
@@ -15,8 +16,9 @@ public class NewBehaviourScript : MonoBehaviour
     [Header("Game camera")]
     Camera mainCamera;
 
-    [Header("Input Action")]
-  //  [SerializeField] InputActionReference move;
+    [Header("Input Actions")]
+    [SerializeField] InputActionReference move;
+
 
     private CharacterController characterController;
 
@@ -39,7 +41,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnEnable()
     {
-    //    move.action.Enable(); Falta input systema
+        move.action.Enable();
     }
     private void OnDisable()
     {

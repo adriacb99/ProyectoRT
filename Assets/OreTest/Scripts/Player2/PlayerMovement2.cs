@@ -7,28 +7,55 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement2 : MonoBehaviour
 {
-    [Header("Movement settings")]
-    [SerializeField] float gravity;
-    [SerializeField] float movementSpeed;
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    private float playerSpeed = 2.0f;
+    private float jumpHeight = 1.0f;
+    private float gravityValue = -9.81f;
 
-    private CharacterController characterController;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-       characterController = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
     }
+
+    
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+
+        // Changes the height position of the player..
+        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    private void OnEnable()
+
+    void OnEnable()
+    {
+       
+    }
+    void OnDisable()
     {
         
     }
-    
 }
