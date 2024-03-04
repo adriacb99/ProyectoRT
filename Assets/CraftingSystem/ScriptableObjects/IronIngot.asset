@@ -16,4 +16,4 @@ MonoBehaviour:
   - Item: {fileID: 11400000, guid: c25b0ff7cf8a9f746bdbe1dd0ded0e61, type: 2}
     quiantity: 4
   CraftedItem: {fileID: 11400000, guid: 7362bd5a30a656843a988c784ad7c2d9, type: 2}
-  time: 5
+  time: 3

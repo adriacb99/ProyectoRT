@@ -31,7 +31,7 @@ public class Furnance : MonoBehaviour
         if (!stopeed)
         {
             for (int i = 0; i < selectedRecipe.RequiredItems.Length; i++){
-                if (selectedRecipe.RequiredItems[i].quiantity > inventory.GetItemInstance(i).quantity  && canCraft) {
+                if (selectedRecipe.RequiredItems[i].quiantity > inventory.GetItemInstance(i).quantity) {
                     canCraft = false;
                 }
             }
@@ -41,7 +41,6 @@ public class Furnance : MonoBehaviour
                 {
                     Debug.Log("Crafting");
                     time = 0;
-                    canCraft = true;
                     for (int i = 0; i < selectedRecipe.RequiredItems.Length; i++){
                         inventory.RetireItem(i, selectedRecipe.RequiredItems[i].quiantity);
                         inventory.AddResultItem(new ItemInstance(selectedRecipe.CraftedItem));
@@ -49,14 +48,15 @@ public class Furnance : MonoBehaviour
                     UpdateCanvas();
                 }
             }
+            canCraft = true;
         }
     }
 
     public void UpdateCanvas()
     {
         canvas.SetActive(true);
-        canvas.GetComponentsInChildren<Slot>()[0].SetSlotImage(selectedRecipe.CraftedItem);
-        canvas.GetComponentsInChildren<Slot>()[1].SetSlotImage(selectedRecipe.RequiredItems[0].Item);
+        canvas.GetComponentsInChildren<Slot>()[0].SetSlotInfo(inventory.result);
+        canvas.GetComponentsInChildren<Slot>()[1].SetSlotInfo(inventory.GetItemInstance(0));
         TextMeshProUGUI[] testo = canvas.GetComponentsInChildren<TextMeshProUGUI>();
         testo[0].text = inventory.result.quantity.ToString();
         testo[1].text = inventory.items[0].quantity.ToString();

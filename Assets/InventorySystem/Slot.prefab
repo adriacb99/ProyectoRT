@@ -61,7 +61,7 @@ MonoBehaviour:
           m_MethodName: OnMouseDownItem
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgument: {fileID: 960305654573672656}
             m_ObjectArgumentAssemblyTypeName: Slot, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -81,6 +81,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotItem: {fileID: 0}
+  quantity: 0
+  slotInstance:
+    itemType: {fileID: 0}
+    quantity: 0
+    maxStack: 0
 --- !u!1 &1975074282562530199
 GameObject:
   m_ObjectHideFlags: 0

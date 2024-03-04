@@ -10,13 +10,21 @@ public class Slot : MonoBehaviour
     public ItemData slotItem;
     public int quantity;
 
+    public ItemInstance slotInstance;
+
     void Awake() {
         slotImage = gameObject.GetComponentInChildren<Image>();
     }
 
-    public void SetSlotImage(ItemData sprite) {
-        //this.quantity = quantity;
-        slotItem = sprite;
-        slotImage.sprite = sprite.icon;
+    public void SetSlotInfo(ItemInstance info) {
+        slotInstance = info;
+        quantity = info.quantity;
+        slotItem = info.itemType;
+        slotImage.sprite = info.itemType.icon;
+    }
+
+    public void UpdateSlot()
+    {
+        GetComponentInChildren<TextMeshProUGUI>().text = slotInstance.quantity.ToString();
     }
 }
