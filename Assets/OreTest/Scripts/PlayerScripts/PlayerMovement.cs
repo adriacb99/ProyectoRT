@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    //Mensaje para push
+
     [Header("Movement settings")]
     [SerializeField] float gravity;
     [SerializeField] float movementSpeed;
