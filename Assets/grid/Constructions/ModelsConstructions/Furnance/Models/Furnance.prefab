@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3453043751426383227}
   m_Layer: 0
   m_Name: Furnance
-  m_TagString: Untagged
+  m_TagString: Construction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   - itemType: {fileID: 11400000, guid: c25b0ff7cf8a9f746bdbe1dd0ded0e61, type: 2}
     quantity: 40
     maxStack: 0
-  resultItem:
+  result:
     itemType: {fileID: 0}
     quantity: 0
     maxStack: 0

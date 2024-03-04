@@ -64,9 +64,9 @@ public class ContructionMining : MonoBehaviour
     }
 
     public void ShowMenu() {
-        Debug.Log("Abrir Menu");
+        //Debug.Log("Abrir Menu");
         // canvas = GameObject.Find("Canvas");
         // canvas.transform.GetChild(0).gameObject.SetActive(true);
-        // canvas.GetComponentInChildren<TextMeshProUGUI>().text = numMin.ToString();
+        //canvas.GetComponentInChildren<TextMeshProUGUI>().text = numMin.ToString();
     }
 }
