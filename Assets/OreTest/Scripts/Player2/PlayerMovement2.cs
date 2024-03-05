@@ -16,7 +16,7 @@ public class PlayerMovement2 : MonoBehaviour
     private bool groundedPlayer;
     private float playerSpeed = 2.0f;
     private float jumpHeight = 1.0f;
-    private float gravityValue = -3f;
+    private float gravityValue = -9.81f;
 
     public GameObject planetObject;
 
@@ -50,25 +50,18 @@ public class PlayerMovement2 : MonoBehaviour
         //moveVector = controls.Player.Move.ReadValue<Vector2>();
 
         moveVector = controls.Player.Move.ReadValue<Vector3>();
-        Debug.Log(moveVector);
 
-        if (controller.isGrounded != true)
-        {
-            verticalVelocity += gravityValue * Time.deltaTime;
-        }
-        else
-        {
-            verticalVelocity = 0f;
-        }
 
-        controller.Move((transform.position - planetObject.transform.position) * verticalVelocity * Time.deltaTime);
-        controller.Move(moveVector * Time.deltaTime);
-        transform.rotation = Quaternion.LookRotation(transform.position - planetObject.transform.position);
+        Debug.Log(controller.isGrounded);
+        if (controller.isGrounded)
+            { verticalVelocity = 0f; }
+        verticalVelocity += gravityValue * Time.deltaTime;
 
-        /*
         playerVelocity.y = verticalVelocity;
-        controller.Move(playerVelocity * Time.deltaTime);
-        controller.Move(moveVector * Time.deltaTime);*/
+
+        Vector3 composedMove = (moveVector * Time.deltaTime) + (playerVelocity * Time.deltaTime);
+        controller.Move(composedMove);
+
 
 
 
@@ -108,5 +101,5 @@ public class PlayerMovement2 : MonoBehaviour
     }
 
 
-    
+
 }

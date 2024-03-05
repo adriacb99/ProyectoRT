@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mineral
   - Construction
+  - Ground
   layers:
   - Default
   - TransparentFX
