@@ -6,6 +6,11 @@ public class ItemsInventoryPlayer : ItemsInventory
 {
     public SlotUI[] ui;
 
+    private void OnValidate()
+    {
+        
+    }
+
     private void Start()
     {
         ui = new SlotUI[maxSlots];

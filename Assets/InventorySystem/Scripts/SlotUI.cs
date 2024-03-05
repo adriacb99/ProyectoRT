@@ -18,7 +18,9 @@ public class SlotUI : MonoBehaviour
     void Awake()
     {
         sprite = transform.GetChild(0).GetComponent<Image>();
+        //sprite.gameObject.SetActive(false);       
         _text = GetComponentInChildren<TextMeshProUGUI>();
+        //_text.gameObject.SetActive(false);
     }
 
     public void UpdateSlotUI(Sprite sprite, int quantity, ItemData slotItem, ItemsInventory.ItemSlot inventorySlot)
@@ -29,6 +31,17 @@ public class SlotUI : MonoBehaviour
         this.inventorySlot = inventorySlot;
 
         _text.text = quantity.ToString();
+
+        if (quantity == 0)
+        {
+            _text.gameObject.SetActive(false);
+            this.sprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            _text.gameObject.SetActive(true);
+            this.sprite.gameObject.SetActive(true);
+        }
     }
 
     public void UpdateSlotTextUI()
@@ -37,10 +50,16 @@ public class SlotUI : MonoBehaviour
         this.inventorySlot.quantity = quantity;
     }
 
+    public void ActivateImage()
+    {
+        sprite.gameObject.SetActive(false);
+    }
+
     public void ClearSlot()
     {
         quantity = 0;
-        sprite.sprite = defaultSprite;
+        //sprite.gameObject.SetActive(false);
+        //sprite.sprite = defaultSprite;
         this.inventorySlot.quantity = 0;
     }
 }
