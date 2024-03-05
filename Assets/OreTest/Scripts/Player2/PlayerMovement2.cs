@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.XR;
 public class PlayerMovement2 : MonoBehaviour
 {
     PlayerControls controls;
-    Vector2 moveVector;
+    Vector3 moveVector;
 
 
     private CharacterController controller;
@@ -16,29 +16,78 @@ public class PlayerMovement2 : MonoBehaviour
     private bool groundedPlayer;
     private float playerSpeed = 2.0f;
     private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
+    private float gravityValue = -3f;
+
+    public GameObject planetObject;
+
+    float verticalVelocity = 0f;
 
     private void Awake()
     {
         controls = new PlayerControls();
 
         controller = GetComponent<CharacterController>();
+
+        
     }
 
-    
+    void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
-        //moveVector = controls.
+        //moveVector = controls.Player.Move.ReadValue<Vector2>();
 
+        moveVector = controls.Player.Move.ReadValue<Vector3>();
+        Debug.Log(moveVector);
 
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (controller.isGrounded != true)
         {
-            playerVelocity.y = 0f;
+            verticalVelocity += gravityValue * Time.deltaTime;
+        }
+        else
+        {
+            verticalVelocity = 0f;
         }
 
+        controller.Move((transform.position - planetObject.transform.position) * verticalVelocity * Time.deltaTime);
+        controller.Move(moveVector * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(transform.position - planetObject.transform.position);
+
+        /*
+        playerVelocity.y = verticalVelocity;
+        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move(moveVector * Time.deltaTime);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * playerSpeed);
 
@@ -52,18 +101,12 @@ public class PlayerMovement2 : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
+        */
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+
+
     }
 
 
-    void OnEnable()
-    {
-       
-    }
-    void OnDisable()
-    {
-        
-    }
+    
 }
