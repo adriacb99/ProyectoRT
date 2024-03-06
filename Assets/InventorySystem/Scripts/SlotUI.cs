@@ -28,7 +28,7 @@ public class SlotUI : MonoBehaviour
         this.sprite.sprite = sprite;
         this.quantity = quantity;
         this.slotItem = slotItem;
-        this.inventorySlot = inventorySlot;
+        this.inventorySlot = inventorySlot;       
 
         _text.text = quantity.ToString();
 
@@ -41,6 +41,27 @@ public class SlotUI : MonoBehaviour
         {
             _text.gameObject.SetActive(true);
             this.sprite.gameObject.SetActive(true);
+        }
+    }
+
+    public void UpdateSlotUI2(Sprite sprite, int quantity, ItemData slotItem, ItemsInventory.ItemSlot inventorySlot)
+    {
+        this.sprite.sprite = sprite;
+        this.quantity = quantity;
+        this.slotItem = slotItem;
+        this.inventorySlot = inventorySlot;
+
+        _text.text = quantity.ToString();
+
+        if (quantity == 0)
+        {
+            _text.gameObject.SetActive(false);
+            this.sprite.color = new Color(this.sprite.color.r, this.sprite.color.g, this.sprite.color.b, 0.5f);
+        }
+        else
+        {
+            _text.gameObject.SetActive(true);
+            this.sprite.color = new Color(this.sprite.color.r, this.sprite.color.g, this.sprite.color.b, 1.0f);
         }
     }
 

@@ -17,6 +17,16 @@ public class ItemsInventory : MonoBehaviour
         }
     }
 
+    
+    public void RetireItemToSlot(int i, int quantity)
+    {
+        if (slots[i].quantity - quantity < 0)
+        {
+            Debug.Log("Se quieren retirar mas items de los que hay, se cancela la retirada");
+        }
+        else slots[i].quantity -= quantity;      
+    }
+
     public bool AddItemToSlot(ItemData slot)
     {
         for (int i = 0; i < slots.Length; i++)

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Furnance : MonoBehaviour
 {
-    InventoryFurnace inventory;
+    ItemsInventoryFurnance inventory;
 
     [SerializeField] CraftRecipe[] recipes;
     [SerializeField] int recipeIndex;
@@ -21,9 +21,11 @@ public class Furnance : MonoBehaviour
 
     private void Start()
     {
-        inventory = GetComponent<InventoryFurnace>();
+        inventory = GetComponent<ItemsInventoryFurnance>();
         selectedRecipe = recipes[0];
         canvas = CanvasSingleton.Instance.GetCanvas(1);
+
+        //inventory.slots[0].itemType.icon = selectedRecipe.CraftedItem.icon;
     }
 
     private void Update()
@@ -31,7 +33,7 @@ public class Furnance : MonoBehaviour
         if (!stopeed)
         {
             for (int i = 0; i < selectedRecipe.RequiredItems.Length; i++){
-                if (selectedRecipe.RequiredItems[i].quiantity > inventory.GetItemInstance(i).quantity) {
+                if (selectedRecipe.RequiredItems[i].quiantity > inventory.slots[i+1].quantity) {
                     canCraft = false;
                 }
             }
@@ -42,23 +44,12 @@ public class Furnance : MonoBehaviour
                     Debug.Log("Crafting");
                     time = 0;
                     for (int i = 0; i < selectedRecipe.RequiredItems.Length; i++){
-                        inventory.RetireItem(i, selectedRecipe.RequiredItems[i].quiantity);
-                        inventory.AddResultItem(new ItemInstance(selectedRecipe.CraftedItem));
+                        inventory.RetireItemToSlot(i+1, selectedRecipe.RequiredItems[i].quiantity);
+                        inventory.AddItemToSlot(selectedRecipe.CraftedItem);
                     }
-                    UpdateCanvas();
                 }
             }
             canCraft = true;
         }
-    }
-
-    public void UpdateCanvas()
-    {
-        canvas.SetActive(true);
-        canvas.GetComponentsInChildren<Slot>()[0].SetSlotInfo(inventory.result);
-        canvas.GetComponentsInChildren<Slot>()[1].SetSlotInfo(inventory.GetItemInstance(0));
-        TextMeshProUGUI[] testo = canvas.GetComponentsInChildren<TextMeshProUGUI>();
-        testo[0].text = inventory.result.quantity.ToString();
-        testo[1].text = inventory.items[0].quantity.ToString();
     }
 }
