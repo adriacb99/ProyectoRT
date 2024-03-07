@@ -10,6 +10,7 @@ public class PlayerMovement2 : MonoBehaviour
     PlayerControls controls;
     Vector3 moveVector;
 
+    private int grounded = 1;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -52,15 +53,21 @@ public class PlayerMovement2 : MonoBehaviour
         moveVector = controls.Player.Move.ReadValue<Vector3>();
 
 
-        Debug.Log(controller.isGrounded);
+        //Debug.Log(controller.isGrounded);
         if (controller.isGrounded)
-            { verticalVelocity = 0f; }
-        verticalVelocity += gravityValue * Time.deltaTime;
+            { verticalVelocity = 0f;
+            grounded = 0;
+        }
+    
+        Debug.Log(grounded);
 
+        verticalVelocity += gravityValue * Time.deltaTime;
+        
         playerVelocity.y = verticalVelocity;
 
-        Vector3 composedMove = (moveVector * Time.deltaTime) + (playerVelocity * Time.deltaTime);
+        Vector3 composedMove = (moveVector * Time.deltaTime) + (-verticalVelocity * Time.deltaTime)  * (planetObject.transform.position - transform.position);
         controller.Move(composedMove);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, this.transform.position  - planetObject.transform.position);
 
 
 
