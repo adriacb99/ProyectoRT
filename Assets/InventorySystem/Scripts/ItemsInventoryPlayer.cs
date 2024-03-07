@@ -21,7 +21,7 @@ public class ItemsInventoryPlayer : ItemsInventory
     {
         for (int i = 0; i < ui.Length; i++)
         {
-            ui[i].UpdateSlotUI(slots[i].itemType?.icon, slots[i].quantity, slots[i].itemType, slots[i]);
+            if (ui[i].isActiveAndEnabled) ui[i].UpdateSlotUI(slots[i].itemType?.icon, slots[i].quantity, slots[i].itemType, slots[i]);
             if (slots[i].itemType != null) slots[i].maxStack = slots[i].itemType.maxStack;
         }
     }

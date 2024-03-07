@@ -52,6 +52,7 @@ public class Planet : MonoBehaviour
             tile.SideTiles(tiles);
         }
         GenerateMinerals();
+        //GenerateGrass();
     }
 
     public enum TileType
@@ -140,7 +141,7 @@ public class Planet : MonoBehaviour
                     tile = grid.GetValue(Grid[index][b]);
                 }
 
-                GameObject T_T = Instantiate(mineralesDisponibles[b].prefab, tile.GetPosition(), Quaternion.identity);
+                GameObject T_T = Instantiate(mineralesDisponibles[b].prefab, tile.GetPosition(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
                 T_T.transform.parent = transform;
                 tile.SetObject(T_T);
 
@@ -148,7 +149,7 @@ public class Planet : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     if (sideTiles[i].CanBuild()) {
-                        GameObject owo = Instantiate(mineralesDisponibles[b].prefab, sideTiles[i].GetPosition(), Quaternion.identity);
+                        GameObject owo = Instantiate(mineralesDisponibles[b].prefab, sideTiles[i].GetPosition(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
                         owo.transform.parent = transform;
                         sideTiles[i].SetObject(owo);
                     }

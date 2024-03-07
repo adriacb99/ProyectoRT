@@ -18,8 +18,17 @@ public class ItemsInventoryFurnance : ItemsInventory
     {
         for (int i = 0; i < ui.Length; i++)
         {
-            ui[i].UpdateSlotUI2(slots[i].itemType?.icon, slots[i].quantity, slots[i].itemType, slots[i]);
+            if (ui[i].isActiveAndEnabled) ui[i].UpdateSlotUI2(slots[i].itemType?.icon, slots[i].quantity, slots[i].itemType, slots[i]);
             if (slots[i].itemType != null) slots[i].maxStack = slots[i].itemType.maxStack;
+        }
+    }
+
+    public void SetCraftItems(CraftRecipe recipe)
+    {
+        slots[0] = new ItemSlot(recipe.CraftedItem);
+        for (int i = 0; i < recipe.RequiredItems.Length; i++)
+        {
+            slots[i + 1] = new ItemSlot(recipe.RequiredItems[i].Item);
         }
     }
 

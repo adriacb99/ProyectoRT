@@ -26,6 +26,7 @@ public class Furnance : MonoBehaviour
         canvas = CanvasSingleton.Instance.GetCanvas(1);
 
         //inventory.slots[0].itemType.icon = selectedRecipe.CraftedItem.icon;
+        inventory.SetCraftItems(selectedRecipe);
     }
 
     private void Update()
@@ -44,8 +45,8 @@ public class Furnance : MonoBehaviour
                     Debug.Log("Crafting");
                     time = 0;
                     for (int i = 0; i < selectedRecipe.RequiredItems.Length; i++){
-                        inventory.RetireItemToSlot(i+1, selectedRecipe.RequiredItems[i].quiantity);
-                        inventory.AddItemToSlot(selectedRecipe.CraftedItem);
+                        bool a = inventory.AddItemToSlot(selectedRecipe.CraftedItem);
+                        if (a) inventory.RetireItemToSlot(i + 1, selectedRecipe.RequiredItems[i].quiantity);
                     }
                 }
             }
