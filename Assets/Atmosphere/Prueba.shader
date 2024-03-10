@@ -147,7 +147,7 @@ Shader "Unlit/Prueba"
 				float2 hitInfo = raySphere(planetCentre, atmosphereRadius, rayOrigin, rayDir);
 				float dstToAtmosphere = hitInfo.x;
 				float dstThroughAtmosphere = min(hitInfo.y, sceneDepth - dstToAtmosphere);
-                if (sceneDepthNonLinear > 0.01) dstThroughAtmosphere = 0.3;
+                //if (sceneDepthNonLinear > 0.01) dstThroughAtmosphere = 0.3;
 
                 if (dstThroughAtmosphere > 0) {
 					const float epsilon = 0.0001;

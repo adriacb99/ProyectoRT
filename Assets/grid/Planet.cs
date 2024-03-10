@@ -55,6 +55,11 @@ public class Planet : MonoBehaviour
         //GenerateGrass();
     }
 
+    public HexGrid<Tile> GetPlanetGrid()
+    {
+        return grid;
+    }
+
     public enum TileType
     {
         WATER = 3,

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: New Atmosphere Settings
   m_EditorClassIdentifier: 
   atmosphereShader: {fileID: 0}
-  inScatteringPoints: 6
-  opticalDepthPoints: 6
-  densityFalloff: 9.6
-  atmosphereScale: 0.33
-  wavelengths: {x: 775.5, y: 549.8, z: 466.7}
-  scatteringStrength: 2.36
+  inScatteringPoints: 8
+  opticalDepthPoints: 8
+  densityFalloff: 17.4
+  atmosphereScale: 1
+  wavelengths: {x: 728, y: 529.2, z: 436.8}
+  scatteringStrength: 1.02
