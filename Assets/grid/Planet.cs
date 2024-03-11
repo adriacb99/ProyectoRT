@@ -5,6 +5,7 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Planet : MonoBehaviour
 {
+    [SerializeField] bool construir = false;
     [SerializeField] int size;
     [SerializeField] float radius;
     public LayerMask layerMask;
@@ -249,7 +250,7 @@ public class Planet : MonoBehaviour
             mesh.uv = newUV;
             Debug.DrawLine(Camera.main.transform.position, hit.point, Color.green);
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && construir)
             {
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())

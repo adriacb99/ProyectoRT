@@ -1040,7 +1040,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 35.2
+  far clip plane: 25
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -3581,7 +3581,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1623008217}
-  - component: {fileID: 1623008216}
+  - component: {fileID: 1623008218}
+  - component: {fileID: 1623008219}
   m_Layer: 0
   m_Name: BeltManager
   m_TagString: Untagged
@@ -3589,25 +3590,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1623008216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623008215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5414fd2efb2f1449f31ff16f596b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  container: {fileID: 1072359707}
-  planet: {fileID: 1754260424}
-  anchura: 0.1
-  divisiones: 1
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &1623008217
 Transform:
   m_ObjectHideFlags: 0
@@ -3623,6 +3605,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1623008218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623008215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8581e16f440ea4786029ade8233130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 1072359707}
+  meshToExtrude: {fileID: 7497134608830541777, guid: 5f5e27b233965694486dbbeb2c325060,
+    type: 3}
+  divisiones: 148
+  escala: 0.15
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  planet: {fileID: 1754260424}
+--- !u!1773428102 &1623008219
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623008215}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 1754260424}
+    weight: 1
 --- !u!224 &1634175721 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8981171686448133563, guid: 4ef4d2de3ff119f49ae6da200038f1a1,
@@ -3939,6 +3969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a572f3146cc0941a571ee24d6deefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  construir: 0
   size: 4
   radius: 10
   layerMask:
