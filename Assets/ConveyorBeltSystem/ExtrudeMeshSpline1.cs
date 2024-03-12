@@ -15,6 +15,8 @@ public class ExtrudeMeshSpline : MonoBehaviour
     [SerializeField] private int divisiones = 1;
     [SerializeField] private float escala = 1;
 
+    [SerializeField] Material material;
+
     private MeshFilter meshFilter;
     Mesh mesh;
 
@@ -34,9 +36,6 @@ public class ExtrudeMeshSpline : MonoBehaviour
         position = new float3[divisiones + 1];
         upVector = new float3[divisiones + 1];
         tangent = new float3[divisiones + 1];
-
-        //container = gameObject.GetComponent<SplineContainer>();
-        //spline = container.Splines[0];
     }
 
     private void Start()
@@ -49,11 +48,11 @@ public class ExtrudeMeshSpline : MonoBehaviour
 
         mesh = new Mesh
         {
-            name = "Extruded Mesh"
+            name = "Mesh Cinta Transportadora"
         };
 
         gameObject.GetComponent<MeshFilter>().mesh = mesh;
-
+        gameObject.GetComponent<MeshRenderer>().material = material;
         //mesh = ExtrudeMesh();
     }
 
@@ -154,15 +153,6 @@ public class ExtrudeMeshSpline : MonoBehaviour
         return temp;
     }
 
-    //void OnDrawGizmosSelected()
-    //{
-    //    // Draw a yellow sphere at the transform's position
-    //    Gizmos.color = Color.yellow;
-    //    for (int i = 0; i < mesh.vertices.Length; i++) {
-    //        Gizmos.DrawSphere(mesh.vertices[i], 0.1f);
-    //    }
-    //}
-
     void Update()
     {
         RaycastHit hit;
@@ -178,10 +168,24 @@ public class ExtrudeMeshSpline : MonoBehaviour
 
                 BezierKnot knot;
                 knot = new BezierKnot(tile.GetPosition());
-
-
+                       
                 knots.Add(knot);
 
+                if (knots.Count > 1) {
+                    Quaternion knotRotation = Quaternion.LookRotation((Vector3)knots[1].Position - (Vector3)knots[0].Position, (Vector3)knots[1].Position - gameObject.transform.position);
+                    knots[0] = new BezierKnot(knots[0].Position, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.3f), knotRotation);
+
+                    for (int i = 1; i < knots.Count - 1; ++i)
+                    {
+                        knotRotation = Quaternion.LookRotation(
+                            (Vector3)knots[i + 1].Position - (Vector3)knots[i - 1].Position, 
+                            (Vector3)knots[i].Position - gameObject.transform.position
+                            );
+                        knots[i] = new BezierKnot(knots[i].Position, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.3f), knotRotation);
+                    }
+                    knotRotation = Quaternion.LookRotation((Vector3)knots[knots.Count - 1].Position - (Vector3)knots[knots.Count - 2].Position, (Vector3)knots[knots.Count - 1].Position - gameObject.transform.position);
+                    knots[knots.Count - 1] = new BezierKnot(knots[knots.Count - 1].Position, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.3f), knotRotation);
+                }
                 spline.Knots = knots;
             }
             if (spline.Count > 1) ExtrudeMesh();

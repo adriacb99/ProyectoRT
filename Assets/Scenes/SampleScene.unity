@@ -3620,8 +3620,9 @@ MonoBehaviour:
   container: {fileID: 1072359707}
   meshToExtrude: {fileID: 7497134608830541777, guid: 5f5e27b233965694486dbbeb2c325060,
     type: 3}
-  divisiones: 148
-  escala: 0.15
+  divisiones: 200
+  escala: 0.12
+  material: {fileID: 2100000, guid: bd07e93efd0023241ac37cd3c3648017, type: 2}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
