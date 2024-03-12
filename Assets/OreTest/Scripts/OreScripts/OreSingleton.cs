@@ -7,6 +7,7 @@ public class OreSingleton : MonoBehaviour
 {
     
     [HideInInspector] public GameObject ore;
+    //[SerializeField] ItemData item;
 
     private void Awake()
     {

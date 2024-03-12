@@ -6,7 +6,8 @@ public class GameSingletonManager : MonoBehaviour
 {
     public static GameSingletonManager Instance { get; private set; }
 
-    [HideInInspector] public GameObject playerObject { get; private set; }
+    //[HideInInspector] public GameObject playerObject { get; private set; }
+    [SerializeField] public GameObject playerGameObject { get; private set; }
 
     public PlayerMining playerMiningManager { get; private set; }
     // Start is called before the first frame update
@@ -17,7 +18,7 @@ public class GameSingletonManager : MonoBehaviour
 
     private void Awake()
     {
-        playerMiningManager = GetComponentInChildren<PlayerMining>();
+        playerMiningManager = GetComponentInChildren<PlayerMining>(); //CAMBIAR PARA PILLARLO DEL OBJETO EN EL INSPECTOR Y NO DEL HIJO
     }
 
 
