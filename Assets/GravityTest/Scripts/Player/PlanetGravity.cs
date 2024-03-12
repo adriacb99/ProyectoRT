@@ -8,7 +8,7 @@ public class PlanetGravity : MonoBehaviour
 
     public void AttractPlayer(GameObject player)
     {
-        Debug.Log("El personaje está siendo atraído");
+        //Debug.Log("El personaje está siendo atraído");
 
         Transform playerTransform = player.transform;
         Rigidbody playerRigidBody = playerTransform.GetComponent<Rigidbody>();
