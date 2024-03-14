@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         movementVectorX = playerControls.Player.Move.ReadValue<Vector2>().y * transform.forward;
         movementVectorY = playerControls.Player.Move.ReadValue<Vector2>().x * transform.right;
 
-        Debug.Log(movementVectorX);
+        //Debug.Log(movementVectorX);
 
         //playerRb.velocity = movementVector * characterSpeed * Time.fixedDeltaTime;
 

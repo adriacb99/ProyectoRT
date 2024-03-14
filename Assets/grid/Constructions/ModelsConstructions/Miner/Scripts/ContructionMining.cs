@@ -54,7 +54,7 @@ public class ContructionMining : MonoBehaviour
                 {
                     if (!stopped)
                     {
-                        min.GetMineral();
+                        //min.GetMineral();  *para arreglar mas tarde*
                         stopped = !GetComponent<Inventory>().AddItem(new ItemInstance(item));
                     }
                 }

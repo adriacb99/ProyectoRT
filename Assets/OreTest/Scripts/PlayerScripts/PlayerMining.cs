@@ -35,16 +35,18 @@ public class PlayerMining : MonoBehaviour
 
     public void mineOre(GameObject ore)
     {
-        Debug.Log("Se ha clickado encima del ore");
+        Debug.Log("MINEORE");
 
         oreObject = ore;
+
+        oreObject.GetComponent<Mineral>().GetMineral(GetComponent<ItemsInventory>());
 
         var index = ores.IndexOf(oreObject);
 
         if (isOreInRange && index != -1)
         {
-            RemoveFromList(oreObject);
-            Destroy(oreObject, 0.01f);
+            //RemoveFromList(oreObject);
+            //Destroy(oreObject, 0.01f);
 
             Debug.Log("Objeto destruido: " + oreObject.name);   
             
@@ -53,14 +55,14 @@ public class PlayerMining : MonoBehaviour
      
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("El personaje y el ore han entrado en contacto");
+        
         isOreInRange = true;
         oreObject = other.gameObject;
 
-        if(oreObject.CompareTag("Ore")) //Comprueba si el objeto con el que ha colisionado es un ore a través de su tag
+        if(oreObject.CompareTag("Mineral")) //Comprueba si el objeto con el que ha colisionado es un ore a través de su tag
         {
             ores.Add(oreObject);
-            
+            Debug.Log("El personaje y el ore han entrado en contacto");
         }
     }
     private void OnTriggerExit(Collider other)
