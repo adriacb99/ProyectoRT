@@ -14,6 +14,7 @@ public class ExtrudeMeshSpline : MonoBehaviour
     [SerializeField] private Mesh meshToExtrude;
     [SerializeField] private int divisiones = 1;
     [SerializeField] private float escala = 1;
+    [SerializeField] float segmentLength = 1;
 
     [SerializeField] Material material;
 
@@ -43,6 +44,8 @@ public class ExtrudeMeshSpline : MonoBehaviour
         spline = container.AddSpline();
         grid = planet.GetComponent<Planet>().GetPlanetGrid();
 
+        divisiones = (int)(container.Splines[1].GetLength() / segmentLength);
+
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
 
@@ -53,11 +56,13 @@ public class ExtrudeMeshSpline : MonoBehaviour
 
         gameObject.GetComponent<MeshFilter>().mesh = mesh;
         gameObject.GetComponent<MeshRenderer>().material = material;
-        //mesh = ExtrudeMesh();
     }
 
     private void ExtrudeMesh()
     {
+        position = new float3[divisiones + 1];
+        upVector = new float3[divisiones + 1];
+        tangent = new float3[divisiones + 1];
 
         for (int i = 0; i <= divisiones; i++)
         {
@@ -148,7 +153,7 @@ public class ExtrudeMeshSpline : MonoBehaviour
 
         for (int i = 0; i < vertices.Length; ++i)
         {
-            temp[i] = Vector3.Scale(vertices[i], new Vector3(1*escala, 1*escala, 0));
+            temp[i] = Vector3.Scale(vertices[i], new Vector3(1*escala, 1*escala/4, 0));
         }
         return temp;
     }
@@ -188,6 +193,7 @@ public class ExtrudeMeshSpline : MonoBehaviour
                 }
                 spline.Knots = knots;
             }
+            divisiones = (int)(container.Splines[1].GetLength() / segmentLength);
             if (spline.Count > 1) ExtrudeMesh();
         }
     }
