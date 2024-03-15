@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5560920789202114508}
   - component: {fileID: 5363470662832112124}
   - component: {fileID: 1375475373335833716}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8187408514966041964}
   - component: {fileID: -6291335828488614645}
   - component: {fileID: -6660838154377845618}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Hierro
   m_TagString: Mineral
   m_Icon: {fileID: 0}

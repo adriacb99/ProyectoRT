@@ -5,7 +5,9 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.UIElements;
+using System.Linq;
+using static BeltItemsManager;
+using static UnityEditor.Progress;
 
 public class BeltItemsManager : MonoBehaviour
 {
@@ -22,21 +24,31 @@ public class BeltItemsManager : MonoBehaviour
     float3 upVector;
 
     List<BeltItem> beltItems;
+    int indexMovingBox = 0;
 
     private float add;
+    private float distanceLastItem;
 
     [Serializable]
     public class BeltItem
     {
         public GameObject ItemBox;
         public float indexSpline;
+        public float distanceFrontBox;
 
         public void SetBox(GameObject itemBox, float indexSpline)
         {
             this.ItemBox = itemBox;
             this.indexSpline = indexSpline;
+            distanceFrontBox = 0;
         }
-            
+        public void SetBox(GameObject itemBox, float indexSpline, float distanceFrontBox)
+        {
+            this.ItemBox = itemBox;
+            this.indexSpline = indexSpline;
+            this.distanceFrontBox = distanceFrontBox;
+        }
+
         public void SetIndex(float index)
         {
             indexSpline = index;
@@ -51,30 +63,44 @@ public class BeltItemsManager : MonoBehaviour
     public bool añadir = false;
     private void OnValidate()
     {
-        añadir = true;
-    }
-    private void LateUpdate()
-    {
         if (añadir == true)
         {
             añadir = false;
             AddItemToBelt(0);
         }
     }
+    private void LateUpdate()
+    {
+
+    }
 
 
     // Update is called once per frame
     void Update()
     {
-        add = beltSpeed / splineContainer.Splines[1].GetLength();
-        //splineContainer.Evaluate(1, time, out position, out tangent, out upVector);
-        foreach (var item in beltItems)
+        if (beltItems.Count > 0)
         {
-            splineContainer.Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
-            Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
-            item.ItemBox.transform.position = position;
-            item.ItemBox.transform.rotation = rotation;
-            item.indexSpline += add;
+            add = beltSpeed / splineContainer.Splines[1].GetLength();
+            //splineContainer.Evaluate(1, time, out position, out tangent, out upVector);
+            int i = 0;
+            foreach (var item in beltItems)
+            {
+                if (i >= indexMovingBox)
+                {
+                    splineContainer.Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
+                    Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
+                    item.ItemBox.transform.position = position;
+                    item.ItemBox.transform.rotation = rotation;
+                    item.indexSpline += add * Time.deltaTime;
+
+                    if (item.distanceFrontBox < 0.25f) indexMovingBox++;
+                }
+                i++;
+            }
+            Debug.Log(indexMovingBox);
+            if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
+            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
+            Debug.Log(beltItems[indexMovingBox].distanceFrontBox);
         }
     }
 
@@ -92,7 +118,11 @@ public class BeltItemsManager : MonoBehaviour
 
         BeltItem item = new BeltItem();
         GameObject obj = Instantiate(defaultItemBoxPrefab, position, rotation);
-        item.SetBox(obj, pos);
+
+        float dist = 1;
+        if (beltItems.Count >= 1) dist = beltItems.Last().indexSpline * splineContainer.Splines[1].GetLength();
+        Debug.Log(dist);
+        item.SetBox(obj, pos, dist);
 
         beltItems.Add(item);
     }
