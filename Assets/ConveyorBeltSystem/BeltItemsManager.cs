@@ -56,13 +56,19 @@ public class BeltItemsManager : MonoBehaviour
         beltItems = new List<BeltItem>();
     }
 
-    public bool añadir = false;
+    public bool addItem = false;
+    public bool quitar = false;
     private void OnValidate()
     {
-        if (añadir == true)
+        if (addItem == true)
         {
-            añadir = false;
+            addItem = false;
             AddItemToBelt(0);
+        }
+        if (quitar == true)
+        {
+            quitar = false;
+            takeItemFromBelt(0);
         }
     }
 
@@ -72,7 +78,7 @@ public class BeltItemsManager : MonoBehaviour
         if (beltItems.Count > 0)
         {
             if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
-            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.25f;
+            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.3f;
             add = beltSpeed / splineContainer.Splines[1].GetLength();
 
             int i = 0;
@@ -86,7 +92,7 @@ public class BeltItemsManager : MonoBehaviour
                     item.ItemBox.transform.rotation = rotation;
                     item.indexSpline += add * Time.deltaTime;
 
-                    if (item.distanceFrontBox < 0.25f && i == indexMovingBox) indexMovingBox++;
+                    if (item.distanceFrontBox < 0.3f && i == indexMovingBox) indexMovingBox++;
                 }
                 i++;
             }
@@ -108,6 +114,12 @@ public class BeltItemsManager : MonoBehaviour
         item.SetBox(obj, pos, dist);
 
         beltItems.Add(item);
+    }
+
+    void takeItemFromBelt(int i) {
+        Destroy(beltItems[i].ItemBox);
+        beltItems.RemoveAt(i);
+        indexMovingBox = i;
     }
 
     public void UpdateLength()
