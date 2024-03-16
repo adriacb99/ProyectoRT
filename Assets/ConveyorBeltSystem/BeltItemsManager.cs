@@ -15,10 +15,6 @@ public class BeltItemsManager : MonoBehaviour
     [SerializeField] GameObject defaultItemBoxPrefab;
     [SerializeField] float beltSpeed;
 
-    [SerializeField]
-    [Range(0f, 1f)]
-    private float time;
-
     float3 position;
     float3 tangent;
     float3 upVector;
@@ -27,7 +23,7 @@ public class BeltItemsManager : MonoBehaviour
     int indexMovingBox = 0;
 
     private float add;
-    private float distanceLastItem;
+    private float actualLength;
 
     [Serializable]
     public class BeltItem
@@ -55,7 +51,7 @@ public class BeltItemsManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         beltItems = new List<BeltItem>();
     }
@@ -69,19 +65,16 @@ public class BeltItemsManager : MonoBehaviour
             AddItemToBelt(0);
         }
     }
-    private void LateUpdate()
-    {
-
-    }
-
 
     // Update is called once per frame
     void Update()
     {
         if (beltItems.Count > 0)
         {
+            if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
+            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.25f;
             add = beltSpeed / splineContainer.Splines[1].GetLength();
-            //splineContainer.Evaluate(1, time, out position, out tangent, out upVector);
+
             int i = 0;
             foreach (var item in beltItems)
             {
@@ -93,21 +86,11 @@ public class BeltItemsManager : MonoBehaviour
                     item.ItemBox.transform.rotation = rotation;
                     item.indexSpline += add * Time.deltaTime;
 
-                    if (item.distanceFrontBox < 0.25f) indexMovingBox++;
+                    if (item.distanceFrontBox < 0.25f && i == indexMovingBox) indexMovingBox++;
                 }
                 i++;
             }
-            Debug.Log(indexMovingBox);
-            if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
-            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
-            Debug.Log(beltItems[indexMovingBox].distanceFrontBox);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(position+upVector/7, 0.075f);
     }
 
     void AddItemToBelt(float pos)
@@ -125,5 +108,15 @@ public class BeltItemsManager : MonoBehaviour
         item.SetBox(obj, pos, dist);
 
         beltItems.Add(item);
+    }
+
+    public void UpdateLength()
+    {
+        foreach (var item in beltItems)
+        {
+            item.indexSpline = (actualLength / splineContainer.Splines[1].GetLength()) * item.indexSpline;
+        }
+        indexMovingBox = 0;
+        actualLength = splineContainer.Splines[1].GetLength();
     }
 }

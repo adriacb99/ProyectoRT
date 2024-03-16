@@ -192,6 +192,7 @@ public class ExtrudeMeshSpline : MonoBehaviour
                     knots[knots.Count - 1] = new BezierKnot(knots[knots.Count - 1].Position, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.3f), knotRotation);
                 }
                 spline.Knots = knots;
+                GetComponent<BeltItemsManager>().UpdateLength();
             }
             divisiones = (int)(container.Splines[1].GetLength() / segmentLength);
             if (spline.Count > 1) ExtrudeMesh();
