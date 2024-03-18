@@ -106,7 +106,7 @@ public class BeltItemsManager : MonoBehaviour
 
     private void UpdateBelt()
     {
-        if (beltItems.Count > 0)
+        if (beltItems.Count > 0 && indexMovingBox < beltItems.Count)
         {
             if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
             else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.25f;
@@ -131,6 +131,7 @@ public class BeltItemsManager : MonoBehaviour
                 }
                 i++;
             }
+            Debug.Log(indexMovingBox);
         }
     }
 
@@ -142,6 +143,7 @@ public class BeltItemsManager : MonoBehaviour
 
         BeltItem item = new BeltItem();
         GameObject obj = Instantiate(defaultItemBoxPrefab, position, rotation);
+        obj.transform.parent = this.transform;
 
         float dist = 1;
         if (beltItems.Count >= 1) dist = beltItems.Last().indexSpline * splineContainer.Splines[1].GetLength();
@@ -151,7 +153,7 @@ public class BeltItemsManager : MonoBehaviour
         beltItems.Add(item);
     }
 
-    void takeItemFromBelt(int i) {
+    public void takeItemFromBelt(int i) {
         Destroy(beltItems[i].ItemBox);
         beltItems.RemoveAt(i);
         indexMovingBox = i;

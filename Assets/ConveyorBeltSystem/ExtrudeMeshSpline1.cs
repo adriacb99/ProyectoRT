@@ -4,7 +4,6 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
-using static UnityEditor.Progress;
 
 public class ExtrudeMeshSpline : MonoBehaviour
 {

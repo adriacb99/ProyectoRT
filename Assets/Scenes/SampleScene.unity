@@ -4220,13 +4220,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   construir: 0
+  gancho: 0
+  canEdit: 0
   size: 4
   radius: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  objetoPrueba: {fileID: 2085526725270584742, guid: 98423116f2592234caad2ac2340fbf79,
-    type: 3}
+  objetosPrueba:
+  - {fileID: 2085526725270584742, guid: 98423116f2592234caad2ac2340fbf79, type: 3}
+  - {fileID: 7235332220086815744, guid: a679d04ccde51af4ebc2e43a9128e8f1, type: 3}
   mineralesDisponibles:
   - prefab: {fileID: 2085526725270584742, guid: 84a99a69a8dcddc4cac463bb64753550,
       type: 3}
