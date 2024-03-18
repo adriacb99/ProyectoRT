@@ -23,7 +23,7 @@ public class OreSingleton : MonoBehaviour
 
     public void CallPlayerToMineOre()
     {
-        Debug.Log("has clickado la mineral");
+        Debug.Log("has clickado al mineral");
         GameSingletonManager.Instance.playerMiningManager.mineOre(this.gameObject);
     }
 

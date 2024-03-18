@@ -30,7 +30,7 @@ public class PlayerMining : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("El jugador está en contacto con un ore: " + isOreInRange);
     }
 
     public void mineOre(GameObject ore)
@@ -39,8 +39,6 @@ public class PlayerMining : MonoBehaviour
 
         oreObject = ore;
 
-        oreObject.GetComponent<Mineral>().GetMineral(GetComponent<ItemsInventory>());
-
         var index = ores.IndexOf(oreObject);
 
         if (isOreInRange && index != -1)
@@ -48,20 +46,23 @@ public class PlayerMining : MonoBehaviour
             //RemoveFromList(oreObject);
             //Destroy(oreObject, 0.01f);
 
-            Debug.Log("Objeto destruido: " + oreObject.name);   
-            
+            Debug.Log("Objeto destruido: " + oreObject.name);
+            oreObject.GetComponent<Mineral>().GetMineral(GetComponent<ItemsInventory>());
+
+
         }
     }
      
     private void OnTriggerEnter(Collider other)
     {
-        
-        isOreInRange = true;
+
         oreObject = other.gameObject;
 
-        if(oreObject.CompareTag("Mineral")) //Comprueba si el objeto con el que ha colisionado es un ore a través de su tag
+        if (oreObject.CompareTag("Mineral")) //Comprueba si el objeto con el que ha colisionado es un ore a través de su tag
         {
+            
             ores.Add(oreObject);
+            isOreInRange = true;
             Debug.Log("El personaje y el ore han entrado en contacto");
         }
     }
