@@ -53,7 +53,7 @@ public class Hook : MonoBehaviour
         switch (state) { 
             case State.Moving:
                 ticks++;
-                pivot.transform.rotation = Quaternion.Lerp(rotationOut, rotationIn, ticks / rotationTicks);
+                pivot.transform.rotation = Quaternion.Lerp(rotationOut, rotationIn, ticks / (float)rotationTicks);
                 if (ticks >= rotationTicks)
                 {
                     ticks = 0;
@@ -65,23 +65,31 @@ public class Hook : MonoBehaviour
                 break; 
             case State.ReturningToStart:
                 ticks++;
-                pivot.transform.rotation = Quaternion.Lerp(rotationOut, rotationIn, ticks / rotationTicks);
+                pivot.transform.rotation = Quaternion.Lerp(rotationIn, rotationOut, ticks / (float)rotationTicks);
                 if (ticks >= rotationTicks)
                 {
                     ticks = 0;
                     state = State.WaitingForItem;
                 }
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        switch (state)
+        {
             case State.SetTileOut:
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit, 100f, layerMask))
                 {
-                    if (Input.GetMouseButtonDown(0)) {
+                    if (Input.GetMouseButtonDown(0))
+                    {
                         Planet.Tile tile = hit.collider.GetComponent<Planet>().GetGrid().GetValue(hit.triangleIndex);
                         transform.position = tile.GetPosition();
-                        rotationOut = Quaternion.LookRotation(tile.GetPosition() - transform.parent.position, hit.normal);
+                        rotationOut = Quaternion.LookRotation((tile.GetPosition() - transform.parent.position).normalized, hit.normal);
                         pivot.transform.rotation = rotationOut;
 
                         Debug.Log("Tile Out: " + tile);
@@ -94,12 +102,12 @@ public class Hook : MonoBehaviour
 
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, 100f, layerMask))
+                if (Physics.Raycast(ray, out hit, 1000f, layerMask))
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
                         Planet.Tile tile = hit.collider.GetComponent<Planet>().GetGrid().GetValue(hit.triangleIndex);
-                        rotationIn = Quaternion.LookRotation(tile.GetPosition() - transform.parent.position, hit.normal);
+                        rotationIn = Quaternion.LookRotation((tile.GetPosition() - transform.parent.position).normalized, hit.normal);
 
                         Debug.Log("Tile In: " + tile);
                         state = State.WaitingForItem;
@@ -109,6 +117,7 @@ public class Hook : MonoBehaviour
                 break;
         }
     }
+    
 
     void OnTriggerStay(Collider other)
     {

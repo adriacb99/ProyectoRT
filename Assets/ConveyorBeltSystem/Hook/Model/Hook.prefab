@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7308393091832581601}
   - component: {fileID: 2383313274548420579}
   - component: {fileID: 6915456374618357116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  pivot: {fileID: 8743187239604720120}
+  pivot: {fileID: 3019179860472397915}
   splineContainer: {fileID: 0}
   beltItemsManager: {fileID: 0}
 --- !u!1 &1430711182446178506
@@ -110,7 +110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7937403110845683428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6125155826196681684}
   - component: {fileID: 5513631637142075329}
   - component: {fileID: 2306348261353434337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,13 +160,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884989864977631281}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
-  m_LocalPosition: {x: -0.7297431, y: 0.80054617, z: 0}
+  m_LocalRotation: {x: 0.49999934, y: -0.49999923, z: -0.5000023, w: 0.49999914}
+  m_LocalPosition: {x: 0, y: 0.423, z: 0.901}
   m_LocalScale: {x: 0.2, y: 2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 329943958587381594}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!33 &6125155826196681684
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 936677550983891186}
   - component: {fileID: 3610621791696464637}
   - component: {fileID: 3543946035226628907}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,8 +265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2620618174530877648}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.22, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.154, z: 0}
   m_LocalScale: {x: 0.2, y: 1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 329943958587381594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Brazo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8434339807804365847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4701052718036451071}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 1821670975776156588}
   - component: {fileID: 3220187809098418851}
   - component: {fileID: 7042413177640296809}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
