@@ -3559,6 +3559,7 @@ GameObject:
   - component: {fileID: 1530305460}
   - component: {fileID: 1530305459}
   - component: {fileID: 1530305458}
+  - component: {fileID: 1530305462}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -3648,6 +3649,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1530305462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530305457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b96fbd2fd69c94dae198ea0785afd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickTime: 0.01666667
 --- !u!1001 &1545443369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3885,9 +3899,9 @@ MonoBehaviour:
   splineContainer: {fileID: 1072359707}
   defaultItemBoxPrefab: {fileID: 4028431243517147441, guid: e097c9880276c7f46950636845b64ff5,
     type: 3}
-  beltSpeed: 1
-  time: 0
-  "a\xF1adir": 0
+  beltSpeed: 3
+  addItem: 0
+  quitar: 0
 --- !u!224 &1634175721 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8981171686448133563, guid: 4ef4d2de3ff119f49ae6da200038f1a1,

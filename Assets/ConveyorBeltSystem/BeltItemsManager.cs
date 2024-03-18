@@ -22,7 +22,6 @@ public class BeltItemsManager : MonoBehaviour
     List<BeltItem> beltItems;
     int indexMovingBox = 0;
 
-    private float add;
     private float actualLength;
 
     [Serializable]
@@ -54,6 +53,7 @@ public class BeltItemsManager : MonoBehaviour
     private void Start()
     {
         beltItems = new List<BeltItem>();
+        TimeTickSystem.onTick += UpdateBelt;
     }
 
     public bool addItem = false;
@@ -73,26 +73,61 @@ public class BeltItemsManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+    //    if (beltItems.Count > 0)
+    //    {
+    //        if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
+    //        else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.25f;
+    //        add = beltSpeed / splineContainer.Splines[1].GetLength();
+
+    //        int i = 0;
+    //        foreach (var item in beltItems)
+    //        {
+    //            if (i >= indexMovingBox)
+    //            {
+    //                if (item.distanceFrontBox < 0.25f && i == indexMovingBox)
+    //                {
+    //                    indexMovingBox++;
+    //                }
+    //                else
+    //                {
+    //                    splineContainer.Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
+    //                    Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
+    //                    item.ItemBox.transform.position = position;
+    //                    item.ItemBox.transform.rotation = rotation;
+    //                    item.indexSpline += add * Time.deltaTime;
+    //                }
+    //            }
+    //            i++;
+    //        }
+    //    }
+    //}
+
+    private void UpdateBelt()
     {
         if (beltItems.Count > 0)
         {
             if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
-            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.3f;
-            add = beltSpeed / splineContainer.Splines[1].GetLength();
+            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.25f;
 
             int i = 0;
             foreach (var item in beltItems)
             {
                 if (i >= indexMovingBox)
                 {
-                    splineContainer.Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
-                    Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
-                    item.ItemBox.transform.position = position;
-                    item.ItemBox.transform.rotation = rotation;
-                    item.indexSpline += add * Time.deltaTime;
-
-                    if (item.distanceFrontBox < 0.3f && i == indexMovingBox) indexMovingBox++;
+                    if (item.distanceFrontBox <= 0.25f && i == indexMovingBox)
+                    {
+                        indexMovingBox++;
+                    }
+                    else
+                    {
+                        splineContainer.Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
+                        Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
+                        item.ItemBox.transform.position = position;
+                        item.ItemBox.transform.rotation = rotation;
+                        item.indexSpline += beltSpeed/100/splineContainer.Splines[1].GetLength();
+                    }
                 }
                 i++;
             }
