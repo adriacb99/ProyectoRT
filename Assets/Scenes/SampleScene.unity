@@ -195,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6817964}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32308078, y: 0.000000016251931, z: -0.0000000055482303, w: 0.9463714}
+  m_LocalRotation: {x: 0.32308078, y: -0.000000016283627, z: 0.0000000055590514, w: 0.9463714}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1269,7 +1269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32308078, y: 0.000000016251931, z: -0.0000000055482303, w: 0.9463714}
+  m_LocalRotation: {x: 0.32308078, y: -0.000000016283627, z: 0.0000000055590514, w: 0.9463714}
   m_LocalPosition: {x: -10.42, y: 10, z: -18.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1522,7 +1522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &425244251
 Transform:
   m_ObjectHideFlags: 0
@@ -1900,7 +1900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580911778}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32308078, y: 0.000000016251931, z: -0.0000000055482303, w: 0.9463714}
+  m_LocalRotation: {x: 0.32308078, y: -0.000000016283627, z: 0.0000000055590514, w: 0.9463714}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4782,7 +4782,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6236666bd77e6c14c825a35269889616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1072359707}
+  splineContainers:
+  - {fileID: 1072359707}
   defaultItemBoxPrefab: {fileID: 4028431243517147441, guid: e097c9880276c7f46950636845b64ff5,
     type: 3}
   beltSpeed: 3
@@ -5114,15 +5115,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   objetosPrueba:
-  - {fileID: 2085526725270584742, guid: 98423116f2592234caad2ac2340fbf79, type: 3}
-  - {fileID: 7235332220086815744, guid: a679d04ccde51af4ebc2e43a9128e8f1, type: 3}
+  - {fileID: 11400000, guid: 9dc1ad3a4e6d0d14b95d617bdc544345, type: 2}
+  - {fileID: 11400000, guid: 13e63b1da6fe6cb4082c606f06d8bb6e, type: 2}
   mineralesDisponibles:
-  - prefab: {fileID: 2085526725270584742, guid: 84a99a69a8dcddc4cac463bb64753550,
-      type: 3}
-    cantidad: 10
-  - prefab: {fileID: 2085526725270584742, guid: f96458e412a99ad48b2fffbad45aaf18,
-      type: 3}
-    cantidad: 10
+  - mineral: {fileID: 11400000, guid: 27406ccdc6a686044af72cfa7b52ccaf, type: 2}
+    cantidad: 20
   atm: {fileID: 11400000, guid: 50ae4d42054f613408c17275a60b44b6, type: 2}
   atmMaterial: {fileID: 2100000, guid: b97e17978d749a94d8b8d4bec7e8ff4c, type: 2}
 --- !u!114 &1754260432
@@ -5910,7 +5907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147098438}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32308078, y: 0.000000020646805, z: -0.0000000070485924, w: 0.9463714}
+  m_LocalRotation: {x: 0.32308078, y: 0.000000017318365, z: -0.0000000059123004, w: 0.9463714}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

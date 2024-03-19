@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Construction : MonoBehaviour
 {
-    public static Construction PlaceConstruction(Transform parent, ConstructionTypeSO obj, Vector3 position, List<GameObject> sideObjects, Quaternion q)
+    public static Construction PlaceConstruction(Transform parent, ConstructionData obj, Vector3 position, List<Construction> sideObjects, Quaternion q)
     {
         Transform constructionTransform = Instantiate(obj.constructionPrefab, position, q);
 
@@ -16,5 +16,5 @@ public class Construction : MonoBehaviour
         return construction;
     }
 
-    private ConstructionTypeSO constructionType;
+    private ConstructionData constructionType;
 }

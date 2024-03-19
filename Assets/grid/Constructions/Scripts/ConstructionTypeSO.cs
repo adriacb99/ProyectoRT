@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class ConstructionTypeSO : ItemData
+public class ConstructionData : ItemData
 {
     public Transform constructionPrefab;
 }

@@ -26,7 +26,7 @@ public class Planet : MonoBehaviour
     Vector2[] newUV;
     Vector2[] oldUV;
     int[] triangles;
-    [SerializeField] GameObject[] objetosPrueba;
+    [SerializeField] ConstructionData[] objetosPrueba;
     [SerializeField] Mineral[] mineralesDisponibles;
 
     [SerializeField] AtmosphereSettings atm;
@@ -35,7 +35,7 @@ public class Planet : MonoBehaviour
 
     [System.Serializable]
     public struct Mineral {
-        public GameObject prefab;
+        public ConstructionData mineral;
         public int cantidad;
     }
 
@@ -82,7 +82,7 @@ public class Planet : MonoBehaviour
         private List<int> tris;
 
         //public BezierKnot knot;
-        public GameObject tileObject;
+        public Construction tileObject;
         public TileType type;
 
         public Tile(HexGrid<Tile> grid, Vector3 localPosition, List<int> tris, int tileTypeIndex) 
@@ -93,7 +93,7 @@ public class Planet : MonoBehaviour
             this.type = (TileType)tileTypeIndex;
         }
 
-        public void SetObject(GameObject tileObject)
+        public void SetObject(Construction tileObject)
         {
             this.tileObject = tileObject;
         }
@@ -124,9 +124,9 @@ public class Planet : MonoBehaviour
             return tris;
         }
 
-        public List<GameObject> GetSideTilesObjects()
+        public List<Construction> GetSideTilesObjects()
         {
-            List<GameObject> result = new List<GameObject>();
+            List<Construction> result = new List<Construction>();
             foreach (Tile tile in sideTiles) {
                 result.Add(tile.tileObject);
             }
@@ -158,17 +158,15 @@ public class Planet : MonoBehaviour
                     tile = grid.GetValue(Grid[index][b]);
                 }
 
-                GameObject T_T = Instantiate(mineralesDisponibles[b].prefab, tile.GetPosition(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
-                T_T.transform.parent = transform;
-                tile.SetObject(T_T);
+                Construction T_T = Construction.PlaceConstruction(this.transform, mineralesDisponibles[b].mineral, tile.GetPosition(), tile.GetSideTilesObjects(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
+                tile.tileObject = T_T;
 
                 List<Tile> sideTiles = tile.GetSideTiles();
                 for (int i = 0; i < 3; i++)
                 {
                     if (sideTiles[i].CanBuild()) {
-                        GameObject owo = Instantiate(mineralesDisponibles[b].prefab, sideTiles[i].GetPosition(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
-                        owo.transform.parent = transform;
-                        sideTiles[i].SetObject(owo);
+                        Construction owo = Construction.PlaceConstruction(this.transform, mineralesDisponibles[b].mineral, sideTiles[i].GetPosition(), sideTiles[i].GetSideTilesObjects(), Quaternion.LookRotation((sideTiles[i].GetPosition() - gameObject.transform.position).normalized));
+                        sideTiles[i].tileObject = owo;
                     }
 
                     // List<Tile> sideTiles2 = sideTiles[i].GetSideTiles();
@@ -270,11 +268,12 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    //GameObject T_T = ContructionMining.PlaceConstruction(transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
-                    //tile.SetObject(T_T);
+                    Construction T_T = ContructionMining.PlaceConstruction(transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
+                    tile.SetObject(T_T);
+                    //T_T.
                 }
                 else if (tile.tileObject.CompareTag("Construction")) {
-                    tile.tileObject.GetComponent<ContructionMining>().ShowMenu();
+                    //tile.tileObject.GetComponent<ContructionMining>().ShowMenu();
                 }
             }
             else if (Input.GetMouseButtonDown(0) && gancho && canEdit)
@@ -282,8 +281,8 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    //GameObject T_T = Hook.PlaceConstruction(transform, objetosPrueba[1], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
-                    //tile.SetObject(T_T);
+                    Construction T_T = Hook.PlaceConstruction(transform, objetosPrueba[1], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
+                    tile.SetObject(T_T);
                 }
                 else if (tile.tileObject.CompareTag("Construction"))
                 {

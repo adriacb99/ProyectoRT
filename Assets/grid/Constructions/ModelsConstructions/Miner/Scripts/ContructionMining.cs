@@ -22,10 +22,10 @@ public class ContructionMining : Construction
 
     bool stopped = true;
 
-    public void SetMinerals(List<GameObject> list)
+    public void SetMinerals(List<GameObject> lista)
     {
         minerals = new List<Mineral>();
-        mineralsToMine = list;
+        mineralsToMine = lista;
         foreach (GameObject obj in mineralsToMine)
         {
             if (obj != null && obj.CompareTag("Mineral")) { minerals.Add(obj.GetComponent<Mineral>()); } 
