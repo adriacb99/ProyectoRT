@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hierro
   m_EditorClassIdentifier: 
   itemName: Hierro
-  icon: {fileID: 21300000, guid: d2c9feb5504d2d246815db39bcbbadbc, type: 3}
+  icon: {fileID: 21300000, guid: 91ef14cffde046d4695f7a895165cf87, type: 3}
   description: 
   maxStack: 33

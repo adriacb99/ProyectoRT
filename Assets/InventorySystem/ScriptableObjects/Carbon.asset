@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Carbon
   m_EditorClassIdentifier: 
   itemName: Carbon
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1de727d084bed8d42bc0e10aa7b99e90, type: 3}
   description: Carbon descripcion
-  maxStack: 64
+  maxStack: 33

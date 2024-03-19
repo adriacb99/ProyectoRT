@@ -30,7 +30,7 @@ public class PlayerMining : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("El jugador está en contacto con un ore: " + isOreInRange);
+        //Debug.Log("El jugador está en contacto con un ore: " + isOreInRange);
     }
 
     public void mineOre(GameObject ore)

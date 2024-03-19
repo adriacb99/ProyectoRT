@@ -31,7 +31,7 @@ public class ItemsInventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i] == null)
+            if (slots[i].itemType == null)
             {
                 slots[i] = new ItemSlot(slot);
                 slots[i].quantity++;
