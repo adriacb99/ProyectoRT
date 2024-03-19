@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 
@@ -80,6 +81,7 @@ public class Planet : MonoBehaviour
         private List<Tile> sideTiles;
         private List<int> tris;
 
+        //public BezierKnot knot;
         public GameObject tileObject;
         public TileType type;
 
@@ -235,6 +237,8 @@ public class Planet : MonoBehaviour
             oldUV.CopyTo(newUV, 0);
             Tile tile = grid.GetValue(hit.triangleIndex);
 
+            // Visuals tile on cursor
+
             int inu = trisIndex[hit.triangleIndex];
             List<int> jeje = Grid[inu];
             foreach (var vert in jeje)
@@ -256,6 +260,8 @@ public class Planet : MonoBehaviour
                 }
             }
 
+            // Contruction
+
             mesh.uv = newUV;
             Debug.DrawLine(Camera.main.transform.position, hit.point, Color.green);
 
@@ -264,8 +270,8 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    GameObject T_T = ContructionMining.PlaceConstruction(transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
-                    tile.SetObject(T_T);
+                    //GameObject T_T = ContructionMining.PlaceConstruction(transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
+                    //tile.SetObject(T_T);
                 }
                 else if (tile.tileObject.CompareTag("Construction")) {
                     tile.tileObject.GetComponent<ContructionMining>().ShowMenu();
@@ -276,8 +282,8 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    GameObject T_T = Hook.PlaceConstruction(transform, objetosPrueba[1], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
-                    tile.SetObject(T_T);
+                    //GameObject T_T = Hook.PlaceConstruction(transform, objetosPrueba[1], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
+                    //tile.SetObject(T_T);
                 }
                 else if (tile.tileObject.CompareTag("Construction"))
                 {

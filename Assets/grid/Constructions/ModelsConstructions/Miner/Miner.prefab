@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 785080146193151032}
   - component: {fileID: -8982179987273634631}
   m_Layer: 6
-  m_Name: Cubo
+  m_Name: Miner
   m_TagString: Construction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

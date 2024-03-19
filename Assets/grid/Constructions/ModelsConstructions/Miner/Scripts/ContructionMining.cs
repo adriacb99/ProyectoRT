@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine;
 
-public class ContructionMining : MonoBehaviour
+public class ContructionMining : Construction
 {
     [SerializeField] private float miningInterval = 1;
     [SerializeField] private GameObject helix;
@@ -21,14 +21,6 @@ public class ContructionMining : MonoBehaviour
     [SerializeField] public ItemData item;
 
     bool stopped = true;
-
-    public static GameObject PlaceConstruction(Transform parent, GameObject obj, Vector3 position, List<GameObject> sideObjects, Quaternion q)
-    {
-        GameObject construction = Instantiate(obj, position, q);
-        construction.transform.parent = parent;
-        construction.GetComponent<ContructionMining>().SetMinerals(sideObjects);
-        return construction;
-    }
 
     public void SetMinerals(List<GameObject> list)
     {

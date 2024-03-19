@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Hook : MonoBehaviour
+public class Hook : Construction
 {
     [SerializeField] int rotationTicks;
     private int ticks;
@@ -30,14 +30,6 @@ public class Hook : MonoBehaviour
         ReturningToStart,
         SetTileOut,
         SetTileIn
-    }
-
-    public static GameObject PlaceConstruction(Transform parent, GameObject obj, Vector3 position, List<GameObject> sideObjects, Quaternion q)
-    {
-        GameObject construction = Instantiate(obj, position, q);
-        construction.transform.parent = parent;
-
-        return construction;
     }
 
     // Start is called before the first frame update
@@ -91,6 +83,7 @@ public class Hook : MonoBehaviour
                         transform.position = tile.GetPosition();
                         rotationOut = Quaternion.LookRotation((tile.GetPosition() - transform.parent.position).normalized, hit.normal);
                         pivot.transform.rotation = rotationOut;
+                        tileOut = tile;
 
                         Debug.Log("Tile Out: " + tile);
                         state = State.SetTileIn;
@@ -108,6 +101,7 @@ public class Hook : MonoBehaviour
                     {
                         Planet.Tile tile = hit.collider.GetComponent<Planet>().GetGrid().GetValue(hit.triangleIndex);
                         rotationIn = Quaternion.LookRotation((tile.GetPosition() - transform.parent.position).normalized, hit.normal);
+                        tileIn = tile;
 
                         Debug.Log("Tile In: " + tile);
                         state = State.WaitingForItem;
@@ -118,7 +112,6 @@ public class Hook : MonoBehaviour
         }
     }
     
-
     void OnTriggerStay(Collider other)
     {
         Debug.Log("Box tocando");

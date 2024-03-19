@@ -11,7 +11,7 @@ using static UnityEditor.Progress;
 
 public class BeltItemsManager : MonoBehaviour
 {
-    [SerializeField] SplineContainer splineContainer;
+    [SerializeField] SplineContainer[] splineContainers;
     [SerializeField] GameObject defaultItemBoxPrefab;
     [SerializeField] float beltSpeed;
 
@@ -108,8 +108,8 @@ public class BeltItemsManager : MonoBehaviour
     {
         if (beltItems.Count > 0 && indexMovingBox < beltItems.Count)
         {
-            if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainer.Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength());
-            else beltItems[0].distanceFrontBox = splineContainer.Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainer.Splines[1].GetLength()) + 0.25f;
+            if (indexMovingBox > 0) beltItems[indexMovingBox].distanceFrontBox = (beltItems[indexMovingBox - 1].indexSpline * splineContainers[0].Splines[1].GetLength()) - (beltItems[indexMovingBox].indexSpline * splineContainers[0].Splines[1].GetLength());
+            else beltItems[0].distanceFrontBox = splineContainers[0].Splines[1].GetLength() - (beltItems[indexMovingBox].indexSpline * splineContainers[0].Splines[1].GetLength()) + 0.25f;
 
             int i = 0;
             foreach (var item in beltItems)
@@ -122,11 +122,11 @@ public class BeltItemsManager : MonoBehaviour
                     }
                     else
                     {
-                        splineContainer.Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
+                        splineContainers[0].Evaluate(1, item.indexSpline, out position, out tangent, out upVector);
                         Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
                         item.ItemBox.transform.position = position;
                         item.ItemBox.transform.rotation = rotation;
-                        item.indexSpline += beltSpeed/100/splineContainer.Splines[1].GetLength();
+                        item.indexSpline += beltSpeed/100/ splineContainers[0].Splines[1].GetLength();
                     }
                 }
                 i++;
@@ -137,7 +137,7 @@ public class BeltItemsManager : MonoBehaviour
 
     void AddItemToBelt(float pos)
     {
-        splineContainer.Evaluate(1, pos, out position, out tangent, out upVector);
+        splineContainers[0].Evaluate(1, pos, out position, out tangent, out upVector);
 
         Quaternion rotation = Quaternion.LookRotation(tangent, upVector);
 
@@ -146,7 +146,7 @@ public class BeltItemsManager : MonoBehaviour
         obj.transform.parent = this.transform;
 
         float dist = 1;
-        if (beltItems.Count >= 1) dist = beltItems.Last().indexSpline * splineContainer.Splines[1].GetLength();
+        if (beltItems.Count >= 1) dist = beltItems.Last().indexSpline * splineContainers[0].Splines[1].GetLength();
         Debug.Log(dist);
         item.SetBox(obj, pos, dist);
 
@@ -163,9 +163,9 @@ public class BeltItemsManager : MonoBehaviour
     {
         foreach (var item in beltItems)
         {
-            item.indexSpline = (actualLength / splineContainer.Splines[1].GetLength()) * item.indexSpline;
+            item.indexSpline = (actualLength / splineContainers[0].Splines[1].GetLength()) * item.indexSpline;
         }
         indexMovingBox = 0;
-        actualLength = splineContainer.Splines[1].GetLength();
+        actualLength = splineContainers[0].Splines[1].GetLength();
     }
 }

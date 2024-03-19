@@ -57,6 +57,8 @@ public class ExtrudeMeshSpline : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().material = material;
     }
 
+
+
     private void ExtrudeMesh()
     {
         position = new float3[divisiones + 1];
