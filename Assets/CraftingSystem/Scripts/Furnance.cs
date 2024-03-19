@@ -22,7 +22,7 @@ public class Furnance : MonoBehaviour
     private void Start()
     {
         inventory = GetComponent<ItemsInventoryFurnance>();
-        selectedRecipe = recipes[0];
+        selectedRecipe = recipes[recipeIndex];
         canvas = CanvasSingleton.Instance.GetCanvas(1);
 
         //inventory.slots[0].itemType.icon = selectedRecipe.CraftedItem.icon;
