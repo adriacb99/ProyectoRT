@@ -51,7 +51,6 @@ public class ContructionMining : Construction
                 }
             }
         }
-        //else helix.GetComponent<Renderer>().material.SetInt("Stopped", 0);
     }
 
     public void ShowMenu() {

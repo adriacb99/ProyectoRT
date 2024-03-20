@@ -32,6 +32,12 @@ public class Hook : Construction
         SetTileIn
     }
 
+    enum OutMode
+    {
+        ItemConstruction,
+        ItemBelt
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +48,10 @@ public class Hook : Construction
     // Update is called once per frame
     void UpdateHook()
     {
-        switch (state) { 
+        switch (state) {
+            case State.WaitingForItem:   
+                // Hacer algo
+                break;
             case State.Moving:
                 ticks++;
                 pivot.transform.rotation = Quaternion.Lerp(rotationOut, rotationIn, ticks / (float)rotationTicks);
@@ -115,7 +124,7 @@ public class Hook : Construction
     void OnTriggerStay(Collider other)
     {
         Debug.Log("Box tocando");
-        if (state == State.WaitingForItem && other.gameObject.CompareTag("Box") && beltItemsManager != null)
+        if (state == State.WaitingForItem && other.gameObject.CompareTag("Box") && beltItemsManager != null && tileOut.tileObject != null)
         {
             Debug.Log("Box taken");
             beltItemsManager.takeItemFromBelt(0);
