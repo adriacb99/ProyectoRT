@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Construction : MonoBehaviour
+public abstract class Construction : MonoBehaviour
 {
     public static Construction PlaceConstruction(Transform parent, ConstructionData obj, Vector3 position, List<Construction> sideObjects, Quaternion q)
     {
@@ -17,4 +17,6 @@ public class Construction : MonoBehaviour
     }
 
     private ConstructionData constructionType;
+
+    public abstract ItemData GetItemFromConstruction();
 }

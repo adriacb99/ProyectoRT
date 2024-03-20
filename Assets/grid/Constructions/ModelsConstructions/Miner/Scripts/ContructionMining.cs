@@ -59,4 +59,9 @@ public class ContructionMining : Construction
         // canvas.transform.GetChild(0).gameObject.SetActive(true);
         //canvas.GetComponentInChildren<TextMeshProUGUI>().text = numMin.ToString();
     }
+
+    public override ItemData GetItemFromConstruction()
+    {
+        throw new System.NotImplementedException();
+    }
 }

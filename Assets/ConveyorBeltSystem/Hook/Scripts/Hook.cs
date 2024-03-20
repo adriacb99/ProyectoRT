@@ -49,8 +49,14 @@ public class Hook : Construction
     void UpdateHook()
     {
         switch (state) {
-            case State.WaitingForItem:   
-                // Hacer algo
+            case State.WaitingForItem:
+                ItemData item = tileOut.tileObject.GetItemFromConstruction();
+                if (tileOut.tileObject != null && item != null)
+                {
+                    Debug.Log("Item cogido");
+                    state = State.Moving;
+                }
+                state = State.Moving;
                 break;
             case State.Moving:
                 ticks++;
@@ -130,5 +136,10 @@ public class Hook : Construction
             beltItemsManager.takeItemFromBelt(0);
             state = State.Moving;
         }
+    }
+
+    public override ItemData GetItemFromConstruction()
+    {
+        return null;
     }
 }
