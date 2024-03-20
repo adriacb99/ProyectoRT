@@ -15,20 +15,20 @@ public class ContructionMining : Construction
 
 
     private float time = 0;
-    private List<GameObject> mineralsToMine;
-    private List<Mineral> minerals;
+    private List<Construction> mineralsToMine;
+    private List<ConstructionMineral> minerals;
 
     [SerializeField] public ItemData item;
 
     bool stopped = true;
 
-    public void SetMinerals(List<GameObject> lista)
+    public void SetMinerals(List<Construction> lista)
     {
-        minerals = new List<Mineral>();
+        minerals = new List<ConstructionMineral>();
         mineralsToMine = lista;
-        foreach (GameObject obj in mineralsToMine)
+        foreach (Construction obj in mineralsToMine)
         {
-            if (obj != null && obj.CompareTag("Mineral")) { minerals.Add(obj.GetComponent<Mineral>()); } 
+            if (obj != null && obj.CompareTag("Mineral")) { minerals.Add(obj.GetComponent<ConstructionMineral>()); } 
         }
         stopped = false;
     }
@@ -46,8 +46,7 @@ public class ContructionMining : Construction
                 {
                     if (!stopped)
                     {
-                        //min.GetMineral();  *para arreglar mas tarde*
-                        stopped = !GetComponent<Inventory>().AddItem(new ItemInstance(item));
+                        min.GetMineral(GetComponent<ItemsInventory>());
                     }
                 }
             }

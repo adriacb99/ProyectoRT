@@ -165,7 +165,7 @@ public class Planet : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     if (sideTiles[i].CanBuild()) {
-                        Construction owo = Construction.PlaceConstruction(this.transform, mineralesDisponibles[b].mineral, sideTiles[i].GetPosition(), sideTiles[i].GetSideTilesObjects(), Quaternion.LookRotation((sideTiles[i].GetPosition() - gameObject.transform.position).normalized));
+                        Construction owo = ConstructionMineral.PlaceConstruction(this.transform, mineralesDisponibles[b].mineral, sideTiles[i].GetPosition(), sideTiles[i].GetSideTilesObjects(), Quaternion.LookRotation((sideTiles[i].GetPosition() - gameObject.transform.position).normalized));
                         sideTiles[i].tileObject = owo;
                     }
 
@@ -270,6 +270,8 @@ public class Planet : MonoBehaviour
                 {
                     Construction T_T = ContructionMining.PlaceConstruction(transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
                     tile.SetObject(T_T);
+                    ContructionMining UwU = T_T as ContructionMining;
+                    UwU.SetMinerals(tile.GetSideTilesObjects());
                     //T_T.
                 }
                 else if (tile.tileObject.CompareTag("Construction")) {

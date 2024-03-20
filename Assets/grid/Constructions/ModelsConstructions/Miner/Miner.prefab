@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2204217715015613032}
   - component: {fileID: 785080146193151032}
-  - component: {fileID: -8982179987273634631}
+  - component: {fileID: 6558216328395964567}
   m_Layer: 6
   m_Name: Miner
   m_TagString: Construction
@@ -51,7 +51,7 @@ MonoBehaviour:
   ConsumoEnergia: 0
   canvas: {fileID: 0}
   item: {fileID: 11400000, guid: c25b0ff7cf8a9f746bdbe1dd0ded0e61, type: 2}
---- !u!114 &-8982179987273634631
+--- !u!114 &6558216328395964567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,11 +60,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2085526725270584742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e921e341630d81140bdc76e6c0002065, type: 3}
+  m_Script: {fileID: 11500000, guid: ac4c84ba1e60c31408c36da48335cf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxItems: 1
-  items: []
+  maxSlots: 1
+  slots: []
 --- !u!1 &7401517134806328258
 GameObject:
   m_ObjectHideFlags: 0

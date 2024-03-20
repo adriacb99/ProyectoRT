@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mineral : MonoBehaviour
+public class ConstructionMineral : Construction
 {
     [SerializeField] int quantity = 1;
     [SerializeField] ItemData itemData;

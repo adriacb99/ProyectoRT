@@ -47,7 +47,7 @@ public class PlayerMining : MonoBehaviour
             //Destroy(oreObject, 0.01f);
 
             Debug.Log("Objeto destruido: " + oreObject.name);
-            oreObject.GetComponent<Mineral>().GetMineral(GetComponent<ItemsInventory>());
+            oreObject.GetComponent<ConstructionMineral>().GetMineral(GetComponent<ItemsInventory>());
 
 
         }
