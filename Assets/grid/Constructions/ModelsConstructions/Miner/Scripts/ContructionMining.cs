@@ -9,7 +9,8 @@ public class ContructionMining : Construction
     [SerializeField] private float miningInterval = 1;
     [SerializeField] private GameObject helix;
     [SerializeField] private int ConsumoEnergia = 0;
-    
+    [SerializeField] GameObject dustPS;
+
     [Header("Canvas")]
     [SerializeField] public GameObject canvas;
 
@@ -22,13 +23,21 @@ public class ContructionMining : Construction
 
     bool stopped = true;
 
+    private void Start()
+    {
+        SetMinerals(tile.GetSideTilesObjects());
+    }
+
     public void SetMinerals(List<Construction> lista)
     {
         minerals = new List<ConstructionMineral>();
         mineralsToMine = lista;
         foreach (Construction obj in mineralsToMine)
         {
-            if (obj != null && obj.CompareTag("Mineral")) { minerals.Add(obj.GetComponent<ConstructionMineral>()); } 
+            if (obj != null && obj.CompareTag("Mineral")) { 
+                minerals.Add(obj.GetComponent<ConstructionMineral>());
+                Instantiate(dustPS, obj.tile.GetPosition(), obj.transform.rotation);
+            } 
         }
         stopped = false;
     }
@@ -62,6 +71,6 @@ public class ContructionMining : Construction
 
     public override ItemData GetItemFromConstruction()
     {
-        throw new System.NotImplementedException();
+        return GetComponent<ItemsInventory>().RetireItemToSlot(0, 1);
     }
 }

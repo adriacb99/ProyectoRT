@@ -14,6 +14,7 @@ public class Hook : Construction
     private Planet.Tile tileIn;
     private Quaternion rotationOut;
     private Quaternion rotationIn;
+    private ItemData itemOnHook;
     //private Planet planet;
 
     [SerializeField] private GameObject pivot;
@@ -50,8 +51,8 @@ public class Hook : Construction
     {
         switch (state) {
             case State.WaitingForItem:
-                ItemData item = tileOut.tileObject.GetItemFromConstruction();
-                if (tileOut.tileObject != null && item != null)
+                itemOnHook = tileOut.tileObject.GetItemFromConstruction();
+                if (tileOut.tileObject != null && itemOnHook != null)
                 {
                     Debug.Log("Item cogido");
                     state = State.Moving;
@@ -68,6 +69,11 @@ public class Hook : Construction
                 }
                 break; 
             case State.WaitingForDestination:
+                beltItemsManager.AddItemToBelt(0);
+                if (tileIn.tileObject != null)
+                {
+                    state = State.ReturningToStart;
+                }
                 state = State.ReturningToStart;
                 break; 
             case State.ReturningToStart:

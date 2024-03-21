@@ -49,6 +49,7 @@ MonoBehaviour:
   miningInterval: 2
   helix: {fileID: 4952180596887208329}
   ConsumoEnergia: 0
+  dustPS: {fileID: 3927826186886586401, guid: b25c78c7ff1637e4dae7304a763dd8d3, type: 3}
   canvas: {fileID: 0}
   item: {fileID: 11400000, guid: c25b0ff7cf8a9f746bdbe1dd0ded0e61, type: 2}
 --- !u!114 &6558216328395964567

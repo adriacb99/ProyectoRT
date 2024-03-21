@@ -8,6 +8,7 @@ public class Planet : MonoBehaviour
 {
     [SerializeField] bool construir = false;
     [SerializeField] bool gancho = false;
+    [SerializeField] bool cinta = false;
     public bool canEdit = true;
 
 
@@ -158,14 +159,14 @@ public class Planet : MonoBehaviour
                     tile = grid.GetValue(Grid[index][b]);
                 }
 
-                Construction T_T = Construction.PlaceConstruction(this.transform, mineralesDisponibles[b].mineral, tile.GetPosition(), tile.GetSideTilesObjects(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
+                Construction T_T = Construction.PlaceConstruction(tile, this.transform, mineralesDisponibles[b].mineral, tile.GetPosition(), tile.GetSideTilesObjects(), Quaternion.LookRotation((tile.GetPosition() - gameObject.transform.position).normalized));
                 tile.tileObject = T_T;
 
                 List<Tile> sideTiles = tile.GetSideTiles();
                 for (int i = 0; i < 3; i++)
                 {
                     if (sideTiles[i].CanBuild()) {
-                        Construction owo = ConstructionMineral.PlaceConstruction(this.transform, mineralesDisponibles[b].mineral, sideTiles[i].GetPosition(), sideTiles[i].GetSideTilesObjects(), Quaternion.LookRotation((sideTiles[i].GetPosition() - gameObject.transform.position).normalized));
+                        Construction owo = ConstructionMineral.PlaceConstruction(sideTiles[i], this.transform, mineralesDisponibles[b].mineral, sideTiles[i].GetPosition(), sideTiles[i].GetSideTilesObjects(), Quaternion.LookRotation((sideTiles[i].GetPosition() - gameObject.transform.position).normalized));
                         sideTiles[i].tileObject = owo;
                     }
 
@@ -268,10 +269,8 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    Construction T_T = ContructionMining.PlaceConstruction(transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
+                    Construction T_T = ContructionMining.PlaceConstruction(tile, transform, objetosPrueba[0], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
                     tile.SetObject(T_T);
-                    ContructionMining UwU = T_T as ContructionMining;
-                    UwU.SetMinerals(tile.GetSideTilesObjects());
                     //T_T.
                 }
                 else if (tile.tileObject.CompareTag("Construction")) {
@@ -283,7 +282,7 @@ public class Planet : MonoBehaviour
                 Debug.Log(tile.ToString());
                 if (tile.CanBuild())
                 {
-                    Construction T_T = Hook.PlaceConstruction(transform, objetosPrueba[1], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
+                    Construction T_T = Hook.PlaceConstruction(tile, transform, objetosPrueba[1], transform.TransformPoint(tile.GetPosition()), tile.GetSideTilesObjects(), Quaternion.LookRotation(hit.normal));
                     tile.SetObject(T_T);
                 }
                 else if (tile.tileObject.CompareTag("Construction"))

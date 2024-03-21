@@ -321,15 +321,17 @@ public class ProceduralPlanetGeneration : MonoBehaviour
 
             if (up)
             {
-                if (colorIndex == 3) for (int i = 0; i < 5; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
-                else normals[indexPos] = normals[indexPos+1] = normals[indexPos+2] = normals[indexPos+3] = normals[indexPos+4] = Vector3.Normalize(cross);
+                //if (colorIndex == 3) for (int i = 0; i < 5; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
+                //else normals[indexPos] = normals[indexPos+1] = normals[indexPos+2] = normals[indexPos+3] = normals[indexPos+4] = Vector3.Normalize(cross);
+                for (int i = 0; i < 5; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
                 tmp.Add(new Vector3(indexPos, indexPos + 1, indexPos + 2));
                 tmp.Add(new Vector3(indexPos + 2, indexPos + 3, indexPos + 4));
                 tmp.Add(new Vector3(indexPos + 4, indexPos, indexPos + 2));
             }
             else {
-                if (colorIndex == 3) for (int i = 0; i < 5; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
-                else normals[indexPos] = normals[indexPos+1] = normals[indexPos+2] = normals[indexPos+3] = normals[indexPos+4] = Vector3.Normalize(-cross);
+                //if (colorIndex == 3) for (int i = 0; i < 5; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
+                //else normals[indexPos] = normals[indexPos+1] = normals[indexPos+2] = normals[indexPos+3] = normals[indexPos+4] = Vector3.Normalize(-cross);
+                for (int i = 0; i < 5; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
                 tmp.Add(new Vector3(indexPos+2, indexPos + 1, indexPos));
                 tmp.Add(new Vector3(indexPos + 4, indexPos + 3, indexPos + 2));
                 tmp.Add(new Vector3(indexPos + 2, indexPos, indexPos + 4));
@@ -367,8 +369,9 @@ public class ProceduralPlanetGeneration : MonoBehaviour
 
             if (up)
             {
-                if (colorIndex == 3) for (int i = 0; i < 6; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
-                else normals[indexPos] = normals[indexPos + 1] = normals[indexPos + 2] = normals[indexPos + 3] = normals[indexPos + 4] = normals[indexPos + 5] = Vector3.Normalize(cross);
+                //if (colorIndex == 3) for (int i = 0; i < 6; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
+                //else normals[indexPos] = normals[indexPos + 1] = normals[indexPos + 2] = normals[indexPos + 3] = normals[indexPos + 4] = normals[indexPos + 5] = Vector3.Normalize(cross);
+                for (int i = 0; i < 6; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
                 tmp.Add(new Vector3(indexPos, indexPos + 1, indexPos + 2));
                 tmp.Add(new Vector3(indexPos, indexPos + 2, indexPos + 5));
                 tmp.Add(new Vector3(indexPos + 2, indexPos + 3, indexPos + 5));
@@ -376,8 +379,9 @@ public class ProceduralPlanetGeneration : MonoBehaviour
             }
             else
             {
-                if (colorIndex == 3) for (int i = 0; i < 6; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
-                else normals[indexPos] = normals[indexPos + 1] = normals[indexPos + 2] = normals[indexPos + 3] = normals[indexPos + 4] = normals[indexPos + 5] = Vector3.Normalize(-cross);
+                //if (colorIndex == 3) for (int i = 0; i < 6; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
+                //else normals[indexPos] = normals[indexPos + 1] = normals[indexPos + 2] = normals[indexPos + 3] = normals[indexPos + 4] = normals[indexPos + 5] = Vector3.Normalize(-cross);
+                for (int i = 0; i < 6; i++) { normals[indexPos + i] = (vertices[i] - gameObject.transform.position).normalized; }
                 tmp.Add(new Vector3(indexPos + 2, indexPos + 1, indexPos));
                 tmp.Add(new Vector3(indexPos + 5, indexPos + 2, indexPos));
                 tmp.Add(new Vector3(indexPos + 5, indexPos + 3, indexPos + 2));

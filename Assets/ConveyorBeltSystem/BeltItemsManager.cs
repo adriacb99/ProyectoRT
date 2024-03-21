@@ -135,7 +135,7 @@ public class BeltItemsManager : MonoBehaviour
         }
     }
 
-    void AddItemToBelt(float pos)
+    public void AddItemToBelt(float pos)
     {
         splineContainers[0].Evaluate(1, pos, out position, out tangent, out upVector);
 
