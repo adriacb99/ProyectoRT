@@ -57,6 +57,10 @@ public class ExtrudeMeshSpline : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().material = material;
     }
 
+    public void CreateNewBelt()
+    {
+        container.AddSpline();
+    }
 
 
     private void ExtrudeMesh()

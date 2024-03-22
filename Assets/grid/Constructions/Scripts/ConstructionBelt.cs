@@ -19,6 +19,6 @@ public class ConstructionBelt : Construction
 
     public override ItemData GetItemFromConstruction()
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 }
