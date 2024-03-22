@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     float wheelClick;
     Vector2 mousePosition;
 
-    float initialCamPosition = 0;
+    float initialCamPosition;
 
     [SerializeField ]float sensibility = 1;
 
@@ -46,9 +46,6 @@ public class CameraController : MonoBehaviour
         Vector2 vector = new Vector2(mousePosition.x / Screen.width, mousePosition.y / Screen.height);
         float mouseXPos = vector.x;
 
-        //Debug.Log("posicion X del raton: " + vector.x);
-        Debug.Log("Click a la rueda del raton: " + wheelClick);
-
         if(cameraZoom < 0)
         {
             FreeLook.m_YAxis.Value = FreeLook.m_YAxis.Value - 1 / sensibility;
@@ -59,31 +56,12 @@ public class CameraController : MonoBehaviour
         }
         else if(wheelClick == 1)
         {
-            Debug.Log("Ha entrado en el wheelclick");
-            if(initialCamPosition != 0)
-            {
-                initialCamPosition = mouseXPos;
-                Debug.Log("posicion X guardada: " + initialCamPosition);
-            }
-
-            if(mousePosition.x > initialCamPosition)
-            {
-                FreeLook.m_XAxis.Value = FreeLook.m_XAxis.Value + 1 / sensibility;
-            }
-            else
-            {
-                FreeLook.m_XAxis.Value = FreeLook.m_XAxis.Value - 1 / sensibility;
-            }
-            
+            FreeLook.m_XAxis.m_MaxSpeed = 100; 
         }
-
-        //Debug.Log("Posicion vector2 del cursor: " + vector);
-      
-
-
-        //Debug.Log("Valor de YAxis: " + FreeLook.m_YAxis.Value);
-        
-
-        //Debug.Log("Valor del camera zoom: " + cameraZoom);
+        if(wheelClick == 0)
+        {
+            FreeLook.m_XAxis.m_MaxSpeed = 0;
+        }
+        Debug.Log("Posicion X del vector del mouse: " + vector.x);
     }
 }
