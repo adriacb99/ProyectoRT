@@ -59,7 +59,47 @@ public class Planet : MonoBehaviour
             tile.SideTiles(tiles);
         }
         GenerateMinerals();
+        MoveWaterTiles();
         //GenerateGrass();
+    }
+
+    private void MoveWaterTiles()
+    {
+        Vector3[] vertices = new Vector3[mesh.vertexCount];
+        mesh.vertices.CopyTo(vertices, 0);
+
+        for (int i = 0; i < Grid.Length; i++)
+        {
+            Tile tile = grid.GetValue(Grid[i][0]);
+            if (tile.type == (TileType)3)
+            {
+                List<int> tris = tile.GetTrisIndex();
+                List<Tile> side = tile.GetSideTiles();
+                foreach (int index in tris)
+                {
+                    vertices[mesh.triangles[index * 3]] = vertices[mesh.triangles[index * 3]].normalized * 9.85f;
+                    vertices[mesh.triangles[index * 3 + 1]] = vertices[mesh.triangles[index * 3 + 1]].normalized * 9.85f;
+                    vertices[mesh.triangles[index * 3 + 2]] = vertices[mesh.triangles[index * 3 + 2]].normalized * 9.85f;
+
+                    foreach (var s in side)
+                    {
+                        if (s.type != (TileType)3) {
+                            List<int> sTris = s.GetTrisIndex();
+                            foreach (int sIndex in sTris)
+                            {
+                                for (int a = 0; a < 3; a++)
+                                {
+                                    if (mesh.vertices[mesh.triangles[index * 3 + a]].Equals(vertices[mesh.triangles[sIndex * 3]])) vertices[mesh.triangles[sIndex * 3]] = vertices[mesh.triangles[sIndex * 3]].normalized * 9.85f;
+                                    else if (mesh.vertices[mesh.triangles[index * 3 + a]].Equals(vertices[mesh.triangles[sIndex * 3 + 1]])) vertices[mesh.triangles[sIndex * 3 + 1]] = vertices[mesh.triangles[sIndex * 3 + 1]].normalized * 9.85f;
+                                    else if (mesh.vertices[mesh.triangles[index * 3 + a]].Equals(vertices[mesh.triangles[sIndex * 3 + 2]])) vertices[mesh.triangles[sIndex * 3 + 2]] = vertices[mesh.triangles[sIndex * 3 + 2]].normalized * 9.85f;
+                                }
+                            }
+                        }
+                    }
+                }               
+            }
+        }
+        mesh.vertices = vertices;
     }
 
     public HexGrid<Tile> GetPlanetGrid()
@@ -191,18 +231,19 @@ public class Planet : MonoBehaviour
         RaycastHit hit;
 
         Vector3 o = transform.TransformPoint(tile.GetPosition());
-        Vector3 n = o - gameObject.transform.position;
+        Vector3 n = o - transform.position;
         n = n.normalized;
 
-        // Calcular circulo perpendicular a la direccion de la Tile central
-        float s = 1.0f / (n.x * n.x + n.z * n.z);
-        float v1x = s * n.z;
-        float v1y = 0.0f;
-        float v1z = s * -n.x;
+        float ux = n.y;
+        float uy = -n.x;
+        float uz = (-n.x * ux - n.y * uy) / (n.z == 0 ? 1 : n.z);
 
-        float v2x = n.y * v1z - n.z * v1y;
-        float v2y = n.z * v1x - n.x * v1z;
-        float v2z = n.x * v1y - n.y * v1x;
+        float vx = n.y * uz - n.z * uy;
+        float vy = n.z * ux - n.x * uz;
+        float vz = n.x * uy - n.y * ux;
+
+        Vector3 uVec = new Vector3(ux, uy, uz).normalized;
+        Vector3 vVec = new Vector3(vx, vy, vz).normalized;
 
         for (int i = 0; i < 8; i++)
         {
@@ -210,12 +251,12 @@ public class Planet : MonoBehaviour
 
             var spawnDir = Vector3.zero;
 
-            spawnDir.x = o.x + 0.5f * (v1x * Mathf.Cos(radians) + v2x * Mathf.Sin(radians));
-            spawnDir.y = o.y + 0.5f * (v1y * Mathf.Cos(radians) + v2y * Mathf.Sin(radians));
-            spawnDir.z = o.z + 0.5f * (v1z * Mathf.Cos(radians) + v2z * Mathf.Sin(radians));
+            spawnDir.x = o.x + 0.5f * (vVec.x * Mathf.Cos(radians) + uVec.x * Mathf.Sin(radians));
+            spawnDir.y = o.y + 0.5f * (vVec.y * Mathf.Cos(radians) + uVec.y * Mathf.Sin(radians));
+            spawnDir.z = o.z + 0.5f * (vVec.z * Mathf.Cos(radians) + uVec.z * Mathf.Sin(radians));
 
 
-            Ray ray = new Ray(spawnDir, transform.position - spawnDir*1.1f);
+            Ray ray = new Ray(spawnDir, transform.position - spawnDir);
 
             if (Physics.Raycast(ray, out hit, 5f, layerMask))
             {
@@ -233,6 +274,8 @@ public class Planet : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, layerMask))
         {
+            Debug.Log(hit.point + " " + grid.GetValue(hit.triangleIndex).GetPosition());
+
             oldUV.CopyTo(newUV, 0);
             Tile tile = grid.GetValue(hit.triangleIndex);
 
@@ -304,6 +347,51 @@ public class Planet : MonoBehaviour
                 }
             }
         }
+
         if (Input.anyKeyDown) atm.SetProperties(atmMaterial, 10);
+
+        //3160
+
+        if (Physics.Raycast(ray, out hit, 100f, layerMask))
+        {
+            Vector3 o = transform.TransformPoint(grid.GetValue(hit.triangleIndex).GetPosition());
+            Vector3 n = o - transform.position;
+            n = n.normalized;
+
+            Debug.Log(n);
+            Debug.DrawRay(Vector3.zero, n * 100, Color.green);
+
+            // Calcular circulo perpendicular a la direccion de la Tile central
+
+            float ux = n.y;
+            float uy = -n.x;
+            float uz = (-n.x * ux - n.y * uy) / ( n.z == 0 ? 1 : n.z);
+
+            float vx = n.y * uz - n.z * uy;
+            float vy = n.z * ux - n.x * uz;
+            float vz = n.x * uy - n.y * ux;
+
+            Vector3 uVec = new Vector3(ux, uy, uz).normalized;
+            Vector3 vVec = new Vector3(vx, vy, vz).normalized;
+
+            Debug.DrawRay(o, new Vector3(ux, uy, uz).normalized, Color.green);
+            Debug.DrawRay(o, new Vector3(vx, vy, vz).normalized, Color.green);
+
+
+            for (int i = 0; i < 8; i++)
+            {
+                var radians = 2 * Mathf.PI / 8 * i;
+
+                var spawnDir = Vector3.zero;
+
+                spawnDir.x = o.x + 0.5f * (vVec.x * Mathf.Cos(radians) + uVec.x * Mathf.Sin(radians));
+                spawnDir.y = o.y + 0.5f * (vVec.y * Mathf.Cos(radians) + uVec.y * Mathf.Sin(radians));
+                spawnDir.z = o.z + 0.5f * (vVec.z * Mathf.Cos(radians) + uVec.z * Mathf.Sin(radians));
+
+                ray = new Ray(spawnDir*1.2f, transform.position - spawnDir);
+
+                Debug.DrawRay(Vector3.zero, spawnDir - transform.position, Color.green);
+            }
+        }
     }
 }

@@ -294,7 +294,7 @@ public class ProceduralPlanetGeneration : MonoBehaviour
                 colorUV = new Vector2(1,0);
                 break;
             case 3:
-                colorUV = new Vector2(1,1);
+                colorUV = new Vector2(1, 0);
                 break;
         }        
         if (vertices.Count == 5)
@@ -304,12 +304,23 @@ public class ProceduralPlanetGeneration : MonoBehaviour
                 trisIndex[triIndex + i] = indexFace;
                 Grid[indexFace].Add(triIndex + i);
             }
-            
-            positions[indexPos] = vertices[0];
-            positions[indexPos + 1] = vertices[1];
-            positions[indexPos + 2] = vertices[2];
-            positions[indexPos + 3] = vertices[3];
-            positions[indexPos + 4] = vertices[4];
+
+            //if (colorIndex == 3)
+            //{
+            //    positions[indexPos] = vertices[0].normalized * 9.85f;
+            //    positions[indexPos + 1] = vertices[1].normalized * 9.85f;
+            //    positions[indexPos + 2] = vertices[2].normalized * 9.85f;
+            //    positions[indexPos + 3] = vertices[3].normalized * 9.85f;
+            //    positions[indexPos + 4] = vertices[4].normalized * 9.85f;
+            //}
+            //else
+            //{
+                positions[indexPos] = vertices[0];
+                positions[indexPos + 1] = vertices[1];
+                positions[indexPos + 2] = vertices[2];
+                positions[indexPos + 3] = vertices[3];
+                positions[indexPos + 4] = vertices[4];
+            //}
 
             Vector3 vec1 = positions[indexPos + 1] - positions[indexPos];
             Vector3 vec2 = positions[indexPos + 4] - positions[indexPos];
@@ -352,12 +363,24 @@ public class ProceduralPlanetGeneration : MonoBehaviour
                 Grid[indexFace].Add(triIndex + i);
             }
 
-            positions[indexPos] = vertices[0];
-            positions[indexPos + 1] = vertices[1];
-            positions[indexPos + 2] = vertices[2];
-            positions[indexPos + 3] = vertices[3];
-            positions[indexPos + 4] = vertices[4];
-            positions[indexPos + 5] = vertices[5];
+            //if (colorIndex == 3)
+            //{
+            //    positions[indexPos] = vertices[0].normalized * 9.85f;
+            //    positions[indexPos + 1] = vertices[1].normalized * 9.85f;
+            //    positions[indexPos + 2] = vertices[2].normalized * 9.85f;
+            //    positions[indexPos + 3] = vertices[3].normalized * 9.85f;
+            //    positions[indexPos + 4] = vertices[4].normalized * 9.85f;
+            //    positions[indexPos + 5] = vertices[5].normalized * 9.85f;
+            //}
+            //else
+            //{
+                positions[indexPos] = vertices[0];
+                positions[indexPos + 1] = vertices[1];
+                positions[indexPos + 2] = vertices[2];
+                positions[indexPos + 3] = vertices[3];
+                positions[indexPos + 4] = vertices[4];
+                positions[indexPos + 5] = vertices[5];
+            //}
 
             Vector3 vec1 = positions[indexPos + 1] - positions[indexPos];
             Vector3 vec2 = positions[indexPos + 4] - positions[indexPos];
